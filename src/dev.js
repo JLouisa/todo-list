@@ -51,11 +51,17 @@ createTodo(getTitle2, getDescription2, getdueDate2, getpriority2, getNotes2, get
 createTodo(getTitle3, getDescription3, getdueDate3, getpriority3, getNotes3, getRemoveTitle3);
 
 //Need to be targeted to enable .removeTodo()
-console.log(todoList);
-console.log(todoList[0].removeTodo());
-// console.log(todoList[1].removeTodo());
-console.log(todoList[2].removeTodo());
-console.log(todoList);
+// console.log(todoList);
+
+// -----------------
+// console.log(todoList[0].removeTodo()); //Preparation
+console.log(todoList[1].removeTodo()); //Groceries
+console.log(todoList[2].removeTodo()); //Movies
+// -----------------
+
+// console.log(todoList);
+
+// console.log(todoList);
 
 for (item of todoList) {
   switch (item.removeTitle) {
@@ -64,19 +70,27 @@ for (item of todoList) {
       break;
     }
     case true: {
+      //send to remove module
       console.log(`remove the Title "${item.title}" is true`);
       console.log(`will now remove "${item.title}" with index ${todoList.indexOf(item)} from list`);
-      //send to remove module
-      removeTodoItem(todoList.indexOf(item));
+      removeTodoItem(todoList.indexOf(item), item);
+      break;
+    }
+    default: {
+      //do nothing
       break;
     }
   }
 }
 
 //Remove module
-function removeTodoItem(index) {
-  removedList.push(todoList.splice(index, 1));
+function removeTodoItem(index, item) {
+  removedList.push(item);
+  todoList.splice(index, 1);
+  console.log(removedList);
 }
 
+console.log(`This is active Todo List`);
 console.log(todoList);
+console.log(`This is active Remove List`);
 console.log(removedList);
