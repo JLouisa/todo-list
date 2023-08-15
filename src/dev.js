@@ -38,6 +38,24 @@ getRemoveTitle = false;
 
 createTodo(getTitle, getDescription, getdueDate, getpriority, getNotes, getRemoveTitle);
 
-console.log(todoList);
+// console.log(todoList);
 console.log(todoList[1].removeTodo());
+console.log(todoList);
+
+for (item of todoList) {
+  switch (item.removeTitle) {
+    case false: {
+      //do nothing
+      break;
+    }
+    case true: {
+      console.log(`remove the Title "${item.title}" is true`);
+      console.log(`will now remove "${item.title}" with index ${todoList.indexOf(item)} from list`);
+      //send to remove module
+      todoList.splice(todoList.indexOf(item), 1);
+      break;
+    }
+  }
+}
+
 console.log(todoList);
