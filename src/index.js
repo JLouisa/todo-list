@@ -8,10 +8,7 @@ class CreateTodo {
       (this.notes = notes);
     this.removeTitle = removeTitle;
   }
-  identifier() {
-    return `The Identifier is ${this.title}${this.priority}`;
-  } //replace with addeventListener
-
+  identifier() {}
   removeTodo() {
     this.removeTitle = true;
   }
@@ -89,7 +86,6 @@ console.log(`This is active Remove List`);
 console.log(removedList);
 
 let i = 0;
-
 let dev = {
   title: `Todo`,
   getDescription: "Send email to John",
@@ -105,33 +101,35 @@ const todoListEl = document.querySelector("#todolist");
 const addBtn = document.querySelector("#addBtn");
 // __________________________________________________________________
 
-//Listiners
-// function add() {
+// Listiners
 addBtn.addEventListener("click", () => {
   i++;
   let divTodo = document.createElement("div");
   divTodo.textContent = `${dev.title} ` + i;
+  divTodo.classList.add(`div${i}`);
+  todoListEl.appendChild(divTodo);
+
+  divTodo.addEventListener("click", () => {
+    console.log("clicking!!");
+    todoListEl.removeChild(divTodo);
+  });
   todoList.push(dev);
-  removeDivs();
-  render();
+  // removeDivs();
 });
-// }
 // __________________________________________________________________
 
 //render
 function render() {
-  for (let n of todoList) {
-    // console.log(n);
-    let k = document.createElement("div");
-    k.textContent = n.title;
-    todoListEl.appendChild(k);
+  for (let todo of todoList) {
+    let placeholder = document.createElement("div");
+    placeholder.textContent = todo.title;
+    todoListEl.appendChild(placeholder);
   }
-  console.log(todoList[todoList.length - 1].title);
 }
 function removeDivs() {
   const divsTodo = document.querySelectorAll("#todolist > div");
-  divsTodo.forEach((n) => {
-    n.remove();
+  divsTodo.forEach((divs) => {
+    divs.remove();
   });
 }
 // __________________________________________________________________
