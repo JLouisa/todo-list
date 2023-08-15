@@ -1,7 +1,4 @@
-// 1. Create class for a todo object
-// 2. todo object pushed to array
-// 3. Connect array objects to html elements
-// 4. function to render array
+import { getRemoveTrue } from "./remove.js";
 
 class CreateTodo {
   constructor(title, description, dueDate, priority, notes, removeTitle) {
@@ -21,8 +18,8 @@ class CreateTodo {
   }
 }
 
-let todoList = [];
-let removedList = [];
+export let todoList = [];
+export let removedList = [];
 
 let getTitle = "Preperation";
 let getDescription = "Send email to John";
@@ -57,32 +54,9 @@ createTodo(getTitle3, getDescription3, getdueDate3, getpriority3, getNotes3, get
 
 //Need to be targeted to enable .removeTodo()
 // -----------------
-// console.log(todoList[0].removeTodo()); //Preparation
-console.log(todoList[1].removeTodo()); //Groceries
-console.log(todoList[2].removeTodo()); //Movies
+todoList[0].removeTodo(); //Preparation
+todoList[1].removeTodo(); //Groceries
+todoList[2].removeTodo(); //Movies
 // -----------------
 
-for (item of todoList) {
-  switch (item.removeTitle) {
-    case false: {
-      //do nothing
-      break;
-    }
-    case true: {
-      //send to remove module
-      removeTodoItem(todoList.indexOf(item), item);
-      break;
-    }
-    default: {
-      //do nothing
-      break;
-    }
-  }
-}
-
-//Remove module
-function removeTodoItem(index, item) {
-  removedList.push(item);
-  todoList.splice(index, 1);
-  console.log(removedList);
-}
+getRemoveTrue(todoList);
