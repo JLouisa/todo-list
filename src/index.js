@@ -1,4 +1,5 @@
 import { getRemoveTrue } from "./remove.js";
+import { getDOM } from "./dom.js";
 
 class CreateTodo {
   constructor(title, description, dueDate, priority, notes, removeTitle) {
@@ -9,8 +10,9 @@ class CreateTodo {
       (this.notes = notes);
     this.removeTitle = removeTitle;
   }
+
   identifier() {
-    return `The Identifier is ${this.title}${this.priority}`;
+    return `${this.title}${this.priority}`;
   } //replace with addeventListener
 
   removeTodo() {
@@ -60,3 +62,48 @@ todoList[2].removeTodo(); //Movies
 // -----------------
 
 getRemoveTrue(todoList);
+
+let i = 0;
+
+let dev = {
+  title: `Todo`,
+  getDescription: "Send email to John",
+  getdueDate: "Next friday",
+  getpriority: "Low",
+  getNotes: "Plan in a meeting for the report",
+  getRemoveTitle: false,
+};
+
+//DOM Caches
+const todoListEl = document.querySelector("#todolist");
+const addBtn = document.querySelector("#addBtn");
+
+//Listiners
+// function add() {
+addBtn.addEventListener("click", () => {
+  i++;
+  let divTodo = document.createElement("div");
+  divTodo.textContent = `${dev.title} ` + i;
+  todoList.push(dev);
+  removeDivs();
+  render();
+});
+// }
+
+//render
+function render() {
+  for (let n of todoList) {
+    // console.log(n);
+    let k = document.createElement("div");
+    k.textContent = n.title;
+    todoListEl.appendChild(k);
+  }
+  console.log(todoList[todoList.length - 1].title);
+}
+
+function removeDivs() {
+  const divsTodo = document.querySelectorAll("#todolist > div");
+  divsTodo.forEach((n) => {
+    n.remove();
+  });
+}
