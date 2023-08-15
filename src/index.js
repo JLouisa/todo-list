@@ -1,6 +1,4 @@
-//Btn add to todo array
-//Render module renders array
-
+//Create Class
 class CreateTodo {
   constructor(title, description, dueDate, priority, notes, removeTitle) {
     (this.title = title),
@@ -18,10 +16,12 @@ class CreateTodo {
     this.removeTitle = true;
   }
 }
+// __________________________________________________________________
 
 let todoList = [];
 let removedList = [];
 
+// Test Variables
 let getTitle = "Preperation";
 let getDescription = "Send email to John";
 let getdueDate = "Next friday";
@@ -43,32 +43,20 @@ let getpriority3 = "medium";
 let getNotes3 = "Going to go with Jay and see the new Avatar 2 movie";
 let getRemoveTitle3 = false;
 
+createTodo(getTitle, getDescription, getdueDate, getpriority, getNotes, getRemoveTitle);
+createTodo(getTitle2, getDescription2, getdueDate2, getpriority2, getNotes2, getRemoveTitle2);
+createTodo(getTitle3, getDescription3, getdueDate3, getpriority3, getNotes3, getRemoveTitle3);
+// __________________________________________________________________
+
+// Create Instances
 function createTodo(title, description, dueDate, priority, notes, remove) {
   let newTodo = new CreateTodo(title, description, dueDate, priority, notes, remove);
   todoList.push(newTodo);
   return newTodo;
 }
+// __________________________________________________________________
 
-// let one = new
-createTodo(getTitle, getDescription, getdueDate, getpriority, getNotes, getRemoveTitle);
-// let two = new
-createTodo(getTitle2, getDescription2, getdueDate2, getpriority2, getNotes2, getRemoveTitle2);
-// let three = new
-createTodo(getTitle3, getDescription3, getdueDate3, getpriority3, getNotes3, getRemoveTitle3);
-
-//Need to be targeted to enable .removeTodo()
-// console.log(todoList);
-
-// -----------------
-// console.log(todoList[0].removeTodo()); //Preparation
-// console.log(todoList[1].removeTodo()); //Groceries
-// console.log(todoList[2].removeTodo()); //Movies
-// -----------------
-
-// console.log(todoList);
-
-// console.log(todoList);
-
+//Status Controller
 for (item of todoList) {
   switch (item.removeTitle) {
     case false: {
@@ -77,8 +65,6 @@ for (item of todoList) {
     }
     case true: {
       //send to remove module
-      console.log(`remove the Title "${item.title}" is true`);
-      console.log(`will now remove "${item.title}" with index ${todoList.indexOf(item)} from list`);
       removeTodoItem(todoList.indexOf(item), item);
       break;
     }
@@ -88,6 +74,7 @@ for (item of todoList) {
     }
   }
 }
+// __________________________________________________________________
 
 //Remove module
 function removeTodoItem(index, item) {
@@ -111,10 +98,12 @@ let dev = {
   getNotes: "Plan in a meeting for the report",
   getRemoveTitle: false,
 };
+// __________________________________________________________________
 
 //DOM Caches
 const todoListEl = document.querySelector("#todolist");
 const addBtn = document.querySelector("#addBtn");
+// __________________________________________________________________
 
 //Listiners
 // function add() {
@@ -127,6 +116,7 @@ addBtn.addEventListener("click", () => {
   render();
 });
 // }
+// __________________________________________________________________
 
 //render
 function render() {
@@ -138,10 +128,10 @@ function render() {
   }
   console.log(todoList[todoList.length - 1].title);
 }
-
 function removeDivs() {
   const divsTodo = document.querySelectorAll("#todolist > div");
   divsTodo.forEach((n) => {
     n.remove();
   });
 }
+// __________________________________________________________________
