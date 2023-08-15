@@ -1,5 +1,5 @@
-import { getRemoveTrue } from "./remove.js";
-import { getDOM } from "./dom.js";
+//Btn add to todo array
+//Render module renders array
 
 class CreateTodo {
   constructor(title, description, dueDate, priority, notes, removeTitle) {
@@ -10,9 +10,8 @@ class CreateTodo {
       (this.notes = notes);
     this.removeTitle = removeTitle;
   }
-
   identifier() {
-    return `${this.title}${this.priority}`;
+    return `The Identifier is ${this.title}${this.priority}`;
   } //replace with addeventListener
 
   removeTodo() {
@@ -20,8 +19,8 @@ class CreateTodo {
   }
 }
 
-export let todoList = [];
-export let removedList = [];
+let todoList = [];
+let removedList = [];
 
 let getTitle = "Preperation";
 let getDescription = "Send email to John";
@@ -50,18 +49,57 @@ function createTodo(title, description, dueDate, priority, notes, remove) {
   return newTodo;
 }
 
+// let one = new
 createTodo(getTitle, getDescription, getdueDate, getpriority, getNotes, getRemoveTitle);
+// let two = new
 createTodo(getTitle2, getDescription2, getdueDate2, getpriority2, getNotes2, getRemoveTitle2);
+// let three = new
 createTodo(getTitle3, getDescription3, getdueDate3, getpriority3, getNotes3, getRemoveTitle3);
 
 //Need to be targeted to enable .removeTodo()
+// console.log(todoList);
+
 // -----------------
-todoList[0].removeTodo(); //Preparation
-todoList[1].removeTodo(); //Groceries
-todoList[2].removeTodo(); //Movies
+// console.log(todoList[0].removeTodo()); //Preparation
+// console.log(todoList[1].removeTodo()); //Groceries
+// console.log(todoList[2].removeTodo()); //Movies
 // -----------------
 
-getRemoveTrue(todoList);
+// console.log(todoList);
+
+// console.log(todoList);
+
+for (item of todoList) {
+  switch (item.removeTitle) {
+    case false: {
+      //do nothing
+      break;
+    }
+    case true: {
+      //send to remove module
+      console.log(`remove the Title "${item.title}" is true`);
+      console.log(`will now remove "${item.title}" with index ${todoList.indexOf(item)} from list`);
+      removeTodoItem(todoList.indexOf(item), item);
+      break;
+    }
+    default: {
+      //do nothing
+      break;
+    }
+  }
+}
+
+//Remove module
+function removeTodoItem(index, item) {
+  removedList.push(item);
+  todoList.splice(index, 1);
+  console.log(removedList);
+}
+
+console.log(`This is active Todo List`);
+console.log(todoList);
+console.log(`This is active Remove List`);
+console.log(removedList);
 
 let i = 0;
 
