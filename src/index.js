@@ -12,12 +12,17 @@ class CreateTodo {
       (this.notes = notes);
     this.removeTitle = removeTitle;
   }
+  identifier() {
+    return `The Identifier is ${this.title}${this.priority}`;
+  } //replace with addeventListener
+
   removeTodo() {
     this.removeTitle = true;
   }
 }
 
 let todoList = [];
+let removedList = [];
 
 let getTitle = "Preperation";
 let getDescription = "Send email to John";
@@ -52,7 +57,7 @@ createTodo(getTitle3, getDescription3, getdueDate3, getpriority3, getNotes3, get
 
 //Need to be targeted to enable .removeTodo()
 console.log(todoList);
-// console.log(todoList[0].removeTodo());
+console.log(todoList[0].removeTodo());
 // console.log(todoList[1].removeTodo());
 console.log(todoList[2].removeTodo());
 console.log(todoList);
@@ -67,10 +72,16 @@ for (item of todoList) {
       console.log(`remove the Title "${item.title}" is true`);
       console.log(`will now remove "${item.title}" with index ${todoList.indexOf(item)} from list`);
       //send to remove module
-      todoList.splice(todoList.indexOf(item), 1);
+      removeTodoItem(todoList.indexOf(item));
       break;
     }
   }
 }
 
+//Remove module
+function removeTodoItem(index) {
+  removedList.push(todoList.splice(index, 1));
+}
+
 console.log(todoList);
+console.log(removedList);
