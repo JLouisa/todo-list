@@ -47,11 +47,12 @@ function createTodo(title, task, duedate, priority, notes, completed) {
   return newTodo;
 }
 
-createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, getcompleted);
+// createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, getcompleted);
 
 //! DOM Cache Module
 const addBtnEl = document.getElementById("addBtn");
 const todolistEl = document.getElementById("todolist");
+const completedlist = document.getElementById("completedlist");
 const form = document.querySelector("form");
 const formTitleEl = document.getElementById("formTitle");
 const formTaskeEl = document.getElementById("formTask");
@@ -104,7 +105,17 @@ function renderController() {
         break;
       }
       case true: {
-        //Do Nothing
+        completedlist.appendChild(todos.DOM);
+        todos.titleEl.textContent = todos.title;
+        todos.DOM.appendChild(todos.titleEl);
+        todos.taskEl.textContent = todos.task;
+        todos.DOM.appendChild(todos.taskEl);
+        todos.duedateEl.textContent = todos.duedate;
+        todos.DOM.appendChild(todos.duedateEl);
+        todos.priorityEl.textContent = todos.priority;
+        todos.DOM.appendChild(todos.priorityEl);
+        todos.notesEl.textContent = todos.notes;
+        todos.DOM.appendChild(todos.notesEl);
         break;
       }
     }
