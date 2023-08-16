@@ -51,7 +51,6 @@ class Todo {
     this.completed = completed;
     this.DOM = document.createElement("div");
   }
-  name;
   listiner() {
     this.DOM.addEventListener("click", () => {
       this.completed = true;
@@ -62,13 +61,6 @@ class Todo {
     this.completed = true;
   }
 }
-
-// function TodoFactory(title, description, duedate, priority, notes, removeTitle) {
-//   const changeRemoveTitle = () => {
-//     this.removeTitle = true;
-//   };
-//   return { title, description, duedate, priority, notes, removeTitle, changeRemoveTitle };
-// }
 
 function createTodo(title, description, duedate, priority, notes, removeTitle) {
   const newTodo = new Todo(title, description, duedate, priority, notes, removeTitle);
