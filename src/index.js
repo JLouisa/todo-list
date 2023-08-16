@@ -172,35 +172,43 @@ function renderController() {
   todoList.forEach((todos) => {
     switch (todos.completed) {
       case false: {
-        todolistEl.appendChild(todos.DOM);
-        todos.titleEl.textContent = todos.title;
-        todos.DOM.appendChild(todos.titleEl);
-        todos.taskEl.textContent = todos.task;
-        todos.DOM.appendChild(todos.taskEl);
-        todos.duedateEl.textContent = todos.duedate;
-        todos.DOM.appendChild(todos.duedateEl);
-        todos.priorityEl.textContent = todos.priority;
-        todos.DOM.appendChild(todos.priorityEl);
-        todos.notesEl.textContent = todos.notes;
-        todos.DOM.appendChild(todos.notesEl);
+        todoRender(todos);
         break;
       }
       case true: {
-        completedlist.appendChild(todos.DOM);
-        todos.titleEl.textContent = todos.title;
-        todos.DOM.appendChild(todos.titleEl);
-        todos.taskEl.textContent = todos.task;
-        todos.DOM.appendChild(todos.taskEl);
-        todos.duedateEl.textContent = todos.duedate;
-        todos.DOM.appendChild(todos.duedateEl);
-        todos.priorityEl.textContent = todos.priority;
-        todos.DOM.appendChild(todos.priorityEl);
-        todos.notesEl.textContent = todos.notes;
-        todos.DOM.appendChild(todos.notesEl);
+        completedRender(todos);
         break;
       }
     }
   });
+}
+
+//! Render Module
+function todoRender(todos) {
+  todolistEl.appendChild(todos.DOM);
+  todos.titleEl.textContent = todos.title;
+  todos.DOM.appendChild(todos.titleEl);
+  todos.taskEl.textContent = todos.task;
+  todos.DOM.appendChild(todos.taskEl);
+  todos.duedateEl.textContent = todos.duedate;
+  todos.DOM.appendChild(todos.duedateEl);
+  todos.priorityEl.textContent = todos.priority;
+  todos.DOM.appendChild(todos.priorityEl);
+  todos.notesEl.textContent = todos.notes;
+  todos.DOM.appendChild(todos.notesEl);
+}
+function completedRender(todos) {
+  completedlist.appendChild(todos.DOM);
+  todos.titleEl.textContent = todos.title;
+  todos.DOM.appendChild(todos.titleEl);
+  todos.taskEl.textContent = todos.task;
+  todos.DOM.appendChild(todos.taskEl);
+  todos.duedateEl.textContent = todos.duedate;
+  todos.DOM.appendChild(todos.duedateEl);
+  todos.priorityEl.textContent = todos.priority;
+  todos.DOM.appendChild(todos.priorityEl);
+  todos.notesEl.textContent = todos.notes;
+  todos.DOM.appendChild(todos.notesEl);
 }
 
 //* Add delete button for todos
