@@ -50,6 +50,11 @@ class Todo {
     this.notes = notes;
     this.completed = completed;
     this.DOM = document.createElement("div");
+    this.titleEl = document.createElement("h3");
+    this.taskEl = document.createElement("div");
+    this.duedateEl = document.createElement("div");
+    this.priorityEl = document.createElement("div");
+    this.notesEl = document.createElement("div");
   }
   listiner() {
     this.DOM.addEventListener("click", () => {
@@ -71,9 +76,9 @@ function createTodo(title, task, duedate, priority, notes, completed) {
 
 createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, getcompleted);
 createTodo(getTitle2, gettask2, getdueDate2, getpriority2, getNotes2, getcompleted2);
-createTodo(getTitle3, gettask3, getdueDate3, getpriority3, getNotes3, getcompleted3);
-createTodo(getTitle4, gettask4, getdueDate4, getpriority4, getNotes4, getcompleted4);
-createTodo(getTitle5, gettask5, getdueDate5, getpriority5, getNotes5, getcompleted5);
+// createTodo(getTitle3, gettask3, getdueDate3, getpriority3, getNotes3, getcompleted3);
+// createTodo(getTitle4, gettask4, getdueDate4, getpriority4, getNotes4, getcompleted4);
+// createTodo(getTitle5, gettask5, getdueDate5, getpriority5, getNotes5, getcompleted5);
 
 //! DOM Cache Module
 const addBtnEl = document.getElementById("addBtn");
@@ -92,14 +97,26 @@ addBtnEl.addEventListener("click", () => {
   renderController();
 });
 
+let titleEl = document.createElement("h3");
+let taskEl = document.createElement("div");
+
 //! Render Controller Module
 function renderController() {
   removeElements();
   todoList.forEach((todos) => {
     switch (todos.completed) {
       case false: {
-        todos.DOM.textContent = todos.title;
         todolistEl.appendChild(todos.DOM);
+        todos.titleEl.textContent = todos.title;
+        todos.DOM.appendChild(todos.titleEl);
+        todos.taskEl.textContent = todos.task;
+        todos.DOM.appendChild(todos.taskEl);
+        todos.duedateEl.textContent = todos.duedate;
+        todos.DOM.appendChild(todos.duedateEl);
+        todos.priorityEl.textContent = todos.priority;
+        todos.DOM.appendChild(todos.priorityEl);
+        todos.notesEl.textContent = todos.notes;
+        todos.DOM.appendChild(todos.notesEl);
         break;
       }
       case true: {
@@ -109,21 +126,3 @@ function renderController() {
     }
   });
 }
-
-let divEl = document.createElement("div");
-todolistEl.appendChild(divEl);
-let titleEl = document.createElement("h3");
-titleEl.textContent = getTitle;
-divEl.appendChild(titleEl);
-let taskEl = document.createElement("div");
-taskEl.textContent = gettask;
-divEl.appendChild(taskEl);
-let dueDateEl = document.createElement("div");
-dueDateEl.textContent = getdueDate;
-divEl.appendChild(dueDateEl);
-let priorityEl = document.createElement("div");
-priorityEl.textContent = getpriority;
-divEl.appendChild(priorityEl);
-let NotesEl = document.createElement("div");
-NotesEl.textContent = getNotes;
-divEl.appendChild(NotesEl);
