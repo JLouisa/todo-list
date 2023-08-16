@@ -76,13 +76,18 @@ function createTodo(title, task, duedate, priority, notes, completed) {
 
 createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, getcompleted);
 createTodo(getTitle2, gettask2, getdueDate2, getpriority2, getNotes2, getcompleted2);
-// createTodo(getTitle3, gettask3, getdueDate3, getpriority3, getNotes3, getcompleted3);
-// createTodo(getTitle4, gettask4, getdueDate4, getpriority4, getNotes4, getcompleted4);
-// createTodo(getTitle5, gettask5, getdueDate5, getpriority5, getNotes5, getcompleted5);
+createTodo(getTitle3, gettask3, getdueDate3, getpriority3, getNotes3, getcompleted3);
+createTodo(getTitle4, gettask4, getdueDate4, getpriority4, getNotes4, getcompleted4);
+createTodo(getTitle5, gettask5, getdueDate5, getpriority5, getNotes5, getcompleted5);
 
 //! DOM Cache Module
 const addBtnEl = document.getElementById("addBtn");
 const todolistEl = document.getElementById("todolist");
+const formTitleEl = document.getElementById("formTitle");
+const formTaskeEl = document.getElementById("formTask");
+const datetimeeEl = document.getElementById("datetime-local");
+const formPriorityEl = document.getElementById("formPriority");
+const formNoteseEl = document.getElementById("formNotes");
 
 //! Remove HtML Elements Module
 function removeElements() {
@@ -92,8 +97,19 @@ function removeElements() {
   });
 }
 
+//!Fetch From Info Module
+function getFormInfo() {
+  console.log(`Path1`);
+  console.log(formTitleEl.value);
+  console.log(formTitleEl.value);
+  console.log(formTitleEl.value);
+  console.log(formTitleEl.value);
+  console.log(formTitleEl.value);
+}
+
 //! Listener Module
 addBtnEl.addEventListener("click", () => {
+  getFormInfo();
   renderController();
 });
 
