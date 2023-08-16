@@ -2,35 +2,35 @@
 
 //Test Variables
 let getTitle = "Preperation";
-let getDescription = "Send email to John";
+let gettask = "Send email to John";
 let getdueDate = "Next friday";
 let getpriority = "Low";
 let getNotes = "Plan in a meeting for the report";
 let getRemoveTitle = false;
 
 let getTitle2 = "Groceries";
-let getDescription2 = "Buy a peach";
+let gettask2 = "Buy a peach";
 let getdueDate2 = "Next monday";
 let getpriority2 = "High";
 let getNotes2 = "The peach is to make peach pie tart";
-let getRemoveTitle2 = false;
+let getcompleted = false;
 
 let getTitle3 = "Movie";
-let getDescription3 = "Date Night";
+let gettask3 = "Date Night";
 let getdueDate3 = "Next saturday";
 let getpriority3 = "medium";
 let getNotes3 = "Going to go with Jay and see the new Avatar 2 movie";
 let getRemoveTitle3 = false;
 
 let getTitle4 = "Meeting";
-let getDescription4 = "Date Night";
+let gettask4 = "Date Night";
 let getdueDate4 = "Next saturday";
 let getpriority4 = "medium";
 let getNotes4 = "Going to go with Jay and see the new Avatar 2 movie";
 let getRemoveTitle4 = false;
 
 let getTitle5 = "Lessons";
-let getDescription5 = "Date Night";
+let gettask5 = "Date Night";
 let getdueDate5 = "Next saturday";
 let getpriority5 = "medium";
 let getNotes5 = "Going to go with Jay and see the new Avatar 2 movie";
@@ -42,9 +42,9 @@ let todoList = [];
 let removedList = [];
 
 class Todo {
-  constructor(title, description, duedate, priority, notes, completed) {
+  constructor(title, task, duedate, priority, notes, completed) {
     this.title = title;
-    this.description = description;
+    this.task = task;
     this.duedate = duedate;
     this.priority = priority;
     this.notes = notes;
@@ -62,18 +62,18 @@ class Todo {
   }
 }
 
-function createTodo(title, description, duedate, priority, notes, removeTitle) {
-  const newTodo = new Todo(title, description, duedate, priority, notes, removeTitle);
+function createTodo(title, task, duedate, priority, notes, removeTitle) {
+  const newTodo = new Todo(title, task, duedate, priority, notes, removeTitle);
   newTodo.listiner();
   todoList.push(newTodo);
   return newTodo;
 }
 
-createTodo(getTitle, getDescription, getdueDate, getpriority, getNotes, getRemoveTitle);
-createTodo(getTitle2, getDescription2, getdueDate2, getpriority2, getNotes2, getRemoveTitle2);
-createTodo(getTitle3, getDescription3, getdueDate3, getpriority3, getNotes3, getRemoveTitle3);
-createTodo(getTitle4, getDescription4, getdueDate4, getpriority4, getNotes4, getRemoveTitle4);
-createTodo(getTitle5, getDescription5, getdueDate5, getpriority5, getNotes5, getRemoveTitle5);
+createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, getRemoveTitle);
+createTodo(getTitle2, gettask2, getdueDate2, getpriority2, getNotes2, getcompleted);
+createTodo(getTitle3, gettask3, getdueDate3, getpriority3, getNotes3, getRemoveTitle3);
+createTodo(getTitle4, gettask4, getdueDate4, getpriority4, getNotes4, getRemoveTitle4);
+createTodo(getTitle5, gettask5, getdueDate5, getpriority5, getNotes5, getRemoveTitle5);
 
 //! DOM Cache Module
 const addBtnEl = document.getElementById("addBtn");
