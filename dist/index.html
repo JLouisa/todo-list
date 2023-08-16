@@ -16,6 +16,17 @@
     <div class="main">
         <div id="content"></div>
         <div>
+            <form action="">
+                <label for="formTitle">Title</label><input type="text" id="formTitle" name="formTitle">
+                <label for="formTask">Task</label>
+                <input type="text" id="formTask" name="formTask">
+                <label for="formDueDate">Due Date</label>
+                <input type="datetime-local" id="datetime-local" name="datetime-local">
+                <label for="formPriority">Priority</label>
+                <input type="text" id="formPriority" name="formPriority">
+                <label for="formNotes">Notes</label>
+                <input type="textarea" id="formNotes" name="formNotes" rows="10" cols="50">
+            </form>
             <button id="addBtn">Add Todo</button>
             <div id="todolist">Your TodoList:</div>
         </div>
