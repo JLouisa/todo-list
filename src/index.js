@@ -75,46 +75,6 @@ createTodo(getTitle3, getDescription3, getdueDate3, getpriority3, getNotes3, get
 createTodo(getTitle4, getDescription4, getdueDate4, getpriority4, getNotes4, getRemoveTitle4);
 createTodo(getTitle5, getDescription5, getdueDate5, getpriority5, getNotes5, getRemoveTitle5);
 
-// console.log(todoList);
-
-//Remove controller (Works fine one for one)
-// todoList[0].changeRemoveTitle(); //Preparation
-// todoList[1].changeRemoveTitle(); //Groceries
-// todoList[2].changeRemoveTitle(); //Movies
-// todoList[3].changeRemoveTitle(); //Meeting
-// todoList[4].changeRemoveTitle(); //Lessons
-
-removeController();
-
-// console.log(todoList);
-
-//! RemoveController Module
-function removeController() {
-  for (let todos of todoList) {
-    switch (todos.removeTitle) {
-      case false: {
-        //do nothing
-        break;
-      }
-      case true: {
-        removeFromList(todos);
-        break;
-      }
-    }
-  }
-}
-
-function removeFromList(todos) {
-  removedList.push(todos);
-  console.log(todoList.indexOf(todos));
-  todoList.splice(todoList.indexOf(todos), 1);
-}
-
-console.log("todoList");
-console.log(todoList);
-console.log("removedList");
-console.log(removedList);
-
 //! DOM Cache Module
 const addBtnEl = document.getElementById("addBtn");
 const todolistEl = document.getElementById("todolist");
