@@ -1,3 +1,5 @@
+// TODO: Create module to add eventlistner
+
 //Test Variables
 let getTitle = "Preperation";
 let getDescription = "Send email to John";
@@ -40,16 +42,24 @@ let todoList = [];
 let removedList = [];
 
 class Todo {
-  constructor(title, description, duedate, priority, notes, removeTitle) {
+  constructor(title, description, duedate, priority, notes, completed) {
     this.title = title;
     this.description = description;
     this.duedate = duedate;
     this.priority = priority;
     this.notes = notes;
-    this.removeTitle = removeTitle;
+    this.completed = completed;
+    this.DOM = document.createElement("div");
+  }
+  name;
+  listiner() {
+    this.DOM.addEventListener("click", () => {
+      this.completed = true;
+      render();
+    });
   }
   changeRemoveTitle() {
-    this.removeTitle = true;
+    this.completed = true;
   }
 }
 
@@ -62,6 +72,7 @@ class Todo {
 
 function createTodo(title, description, duedate, priority, notes, removeTitle) {
   const newTodo = new Todo(title, description, duedate, priority, notes, removeTitle);
+  newTodo.listiner();
   todoList.push(newTodo);
   return newTodo;
 }
@@ -85,6 +96,7 @@ removeController();
 
 // console.log(todoList);
 
+//! RemoveController Module
 function removeController() {
   for (let todos of todoList) {
     switch (todos.removeTitle) {
@@ -93,14 +105,14 @@ function removeController() {
         break;
       }
       case true: {
-        remoeFromList(todos);
+        removeFromList(todos);
         break;
       }
     }
   }
 }
 
-function remoeFromList(todos) {
+function removeFromList(todos) {
   removedList.push(todos);
   console.log(todoList.indexOf(todos));
   todoList.splice(todoList.indexOf(todos), 1);
@@ -110,3 +122,38 @@ console.log("todoList");
 console.log(todoList);
 console.log("removedList");
 console.log(removedList);
+
+//! DOM Cache Module
+const addBtnEl = document.getElementById("addBtn");
+const todolistEl = document.getElementById("todolist");
+
+//! Remove HtML Elements Module
+function removeElements() {
+  const todoListDivsEl = document.querySelectorAll("#todolist > *");
+  todoListDivsEl.forEach((divs) => {
+    divs.remove();
+  });
+}
+
+//! Listener Module
+addBtnEl.addEventListener("click", () => {
+  render();
+});
+
+//! Render Module
+function render() {
+  removeElements();
+  todoList.forEach((todos) => {
+    switch (todos.completed) {
+      case false: {
+        todos.DOM.textContent = todos.title;
+        todolistEl.appendChild(todos.DOM);
+        break;
+      }
+      case true: {
+        //Do Nothing
+        break;
+      }
+    }
+  });
+}
