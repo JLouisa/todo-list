@@ -6,35 +6,35 @@ let gettask = "Send email to John";
 let getdueDate = "Next friday";
 let getpriority = "Low";
 let getNotes = "Plan in a meeting for the report";
-let getRemoveTitle = false;
+let getcompleted = false;
 
 let getTitle2 = "Groceries";
 let gettask2 = "Buy a peach";
 let getdueDate2 = "Next monday";
 let getpriority2 = "High";
 let getNotes2 = "The peach is to make peach pie tart";
-let getcompleted = false;
+let getcompleted2 = false;
 
 let getTitle3 = "Movie";
 let gettask3 = "Date Night";
 let getdueDate3 = "Next saturday";
 let getpriority3 = "medium";
 let getNotes3 = "Going to go with Jay and see the new Avatar 2 movie";
-let getRemoveTitle3 = false;
+let getcompleted3 = false;
 
 let getTitle4 = "Meeting";
 let gettask4 = "Date Night";
 let getdueDate4 = "Next saturday";
 let getpriority4 = "medium";
 let getNotes4 = "Going to go with Jay and see the new Avatar 2 movie";
-let getRemoveTitle4 = false;
+let getcompleted4 = false;
 
 let getTitle5 = "Lessons";
 let gettask5 = "Date Night";
 let getdueDate5 = "Next saturday";
 let getpriority5 = "medium";
 let getNotes5 = "Going to go with Jay and see the new Avatar 2 movie";
-let getRemoveTitle5 = false;
+let getcompleted5 = false;
 // =====================================================
 
 //Variables
@@ -54,26 +54,26 @@ class Todo {
   listiner() {
     this.DOM.addEventListener("click", () => {
       this.completed = true;
-      render();
+      renderController();
     });
   }
-  changeRemoveTitle() {
+  changecompleted() {
     this.completed = true;
   }
 }
 
-function createTodo(title, task, duedate, priority, notes, removeTitle) {
-  const newTodo = new Todo(title, task, duedate, priority, notes, removeTitle);
+function createTodo(title, task, duedate, priority, notes, completed) {
+  const newTodo = new Todo(title, task, duedate, priority, notes, completed);
   newTodo.listiner();
   todoList.push(newTodo);
   return newTodo;
 }
 
-createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, getRemoveTitle);
-createTodo(getTitle2, gettask2, getdueDate2, getpriority2, getNotes2, getcompleted);
-createTodo(getTitle3, gettask3, getdueDate3, getpriority3, getNotes3, getRemoveTitle3);
-createTodo(getTitle4, gettask4, getdueDate4, getpriority4, getNotes4, getRemoveTitle4);
-createTodo(getTitle5, gettask5, getdueDate5, getpriority5, getNotes5, getRemoveTitle5);
+createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, getcompleted);
+createTodo(getTitle2, gettask2, getdueDate2, getpriority2, getNotes2, getcompleted2);
+createTodo(getTitle3, gettask3, getdueDate3, getpriority3, getNotes3, getcompleted3);
+createTodo(getTitle4, gettask4, getdueDate4, getpriority4, getNotes4, getcompleted4);
+createTodo(getTitle5, gettask5, getdueDate5, getpriority5, getNotes5, getcompleted5);
 
 //! DOM Cache Module
 const addBtnEl = document.getElementById("addBtn");
@@ -89,11 +89,11 @@ function removeElements() {
 
 //! Listener Module
 addBtnEl.addEventListener("click", () => {
-  render();
+  renderController();
 });
 
-//! Render Module
-function render() {
+//! Render Controller Module
+function renderController() {
   removeElements();
   todoList.forEach((todos) => {
     switch (todos.completed) {
@@ -109,3 +109,21 @@ function render() {
     }
   });
 }
+
+let divEl = document.createElement("div");
+todolistEl.appendChild(divEl);
+let titleEl = document.createElement("h3");
+titleEl.textContent = getTitle;
+divEl.appendChild(titleEl);
+let taskEl = document.createElement("div");
+taskEl.textContent = gettask;
+divEl.appendChild(taskEl);
+let dueDateEl = document.createElement("div");
+dueDateEl.textContent = getdueDate;
+divEl.appendChild(dueDateEl);
+let priorityEl = document.createElement("div");
+priorityEl.textContent = getpriority;
+divEl.appendChild(priorityEl);
+let NotesEl = document.createElement("div");
+NotesEl.textContent = getNotes;
+divEl.appendChild(NotesEl);
