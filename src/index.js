@@ -31,7 +31,11 @@ class Todo {
   }
   listiner() {
     this.DOM.addEventListener("click", () => {
-      this.completed = true;
+      if (this.completed == false) {
+        this.completed = true;
+      } else {
+        this.completed = false;
+      }
       renderController();
     });
   }
