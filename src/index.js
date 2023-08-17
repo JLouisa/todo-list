@@ -135,6 +135,7 @@ function completedRender(todos) {
 }
 
 //! New Section Class
+let newTodoLists = [];
 class NewListSection {
   constructor(name) {
     this.name = name;
@@ -149,15 +150,27 @@ function createNewListSection(name) {
 
 const addNewListSection = document.getElementById("addNewListSection");
 const btnNewListSection = document.getElementById("btnNewListSection");
+const myLists = document.querySelector(".myLists");
+
 btnNewListSection.addEventListener("click", () => {
   event.preventDefault();
   getNewFormListInfo();
-  // validateMyForm();
 });
 
 function getNewFormListInfo() {
   console.log(addNewListSection.value);
-  const newList = new NewListSection(addNewListSection.value);
-  console.log(newList);
+  newTodoLists.push(new NewListSection(addNewListSection.value));
+  console.log(newTodoLists);
   form.reset();
+  renderNewList();
+}
+
+function renderNewList() {
+  newTodoLists.forEach((list) => {
+    list.sectionEl.textContent = list.name;
+    // list.listName.classList.add = `${list.name}list`;
+    list.listName.setAttribute("id", `${list.name}list`);
+    myLists.prepend(list.listName);
+    myLists.prepend(list.sectionEl);
+  });
 }
