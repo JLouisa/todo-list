@@ -30,7 +30,7 @@ class Todo {
     this.priorityEl = document.createElement("div");
     this.notesEl = document.createElement("div");
   }
-  listiner() {
+  listener() {
     this.DOM.addEventListener("click", () => {
       if (this.completed == false) {
         this.completed = true;
@@ -57,7 +57,7 @@ class NewListSection {
 //! Create Class variable
 function createTodo(title, task, duedate, priority, notes, myTodoList, completed) {
   const newTodo = new Todo(title, task, duedate, priority, notes, myTodoList, completed);
-  newTodo.listiner();
+  newTodo.listener();
   todoList.push(newTodo);
   return newTodo;
 }
@@ -66,7 +66,7 @@ function createNewListSection(name) {
 }
 
 //! DOM Cache Module
-const addBtnEl = document.getElementById("addBtn");
+const addNewTodoBtnEl = document.getElementById("addBtn");
 const todolistEl = document.getElementById("todolist");
 const completedlist = document.getElementById("completedlist");
 const formTodo = document.getElementById("formTodo");
@@ -91,21 +91,20 @@ function removeElements() {
 
 //! Fetch Form Info Module
 function getFormInfo() {
-  todoList.push(
-    createTodo(
-      formTitleEl.value,
-      formTaskeEl.value,
-      datetimeeEl.value,
-      formPriorityEl.value,
-      formNoteseEl.value,
-      todoSelect.value,
-      false
-    )
+  createTodo(
+    formTitleEl.value,
+    formTaskeEl.value,
+    datetimeeEl.value,
+    formPriorityEl.value,
+    formNoteseEl.value,
+    todoSelect.value,
+    false
   );
   formTodo.reset();
+  completedRenderController();
 }
 
-//! Form Info Controller
+//! Form Info List Controller
 function getNewFormListInfo() {
   newTodoLists.push(new NewListSection(addNewListSection.value));
   formList.reset();
@@ -113,9 +112,9 @@ function getNewFormListInfo() {
 }
 
 //! Listen Module
-addBtnEl.addEventListener("click", () => {
+addNewTodoBtnEl.addEventListener("click", () => {
   getFormInfo();
-  completedRenderController();
+  // completedRenderController();
 });
 btnNewListSection.addEventListener("click", () => {
   event.preventDefault();
@@ -141,17 +140,13 @@ function completedRenderController() {
 
 //! Render Controller Module
 function renderController(todos) {
-  if (newTodoLists.length === 0) {
+  if (todos.myTodoList == "todolist") {
     defaultRender(todos);
   } else {
     newTodoLists.forEach((list) => {
       switch (list.name) {
         case todos.myTodoList: {
           todoRender(list, todos);
-          break;
-        }
-        default: {
-          defaultRender(todos);
           break;
         }
       }
@@ -207,6 +202,7 @@ function completedRender(todos) {
 function renderNewList() {
   newTodoLists.forEach((list) => {
     list.sectiontitleEl.textContent = list.name;
+    list.listSection.setAttribute("class", "list");
     list.listName.setAttribute("id", `${list.name}`);
     myLists.prepend(list.listSection);
     list.listSection.appendChild(list.sectiontitleEl);
