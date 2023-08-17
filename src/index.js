@@ -141,13 +141,11 @@ function completedRenderController() {
 //! Render Controller Module
 function renderController(todos) {
   if (todos.myTodoList == "todolist") {
-    console.log("path 1");
     defaultRender(todos);
   } else {
     newTodoLists.forEach((list) => {
       switch (list.name) {
         case todos.myTodoList: {
-          console.log("path 1");
           todoRender(list, todos);
           break;
         }
