@@ -8,7 +8,6 @@ let getpriority = "Low";
 let getNotes = "Plan in a meeting for the report";
 let getMyTodoList = "todolist";
 let getcompleted = false;
-
 // =====================================================
 
 //Variables
@@ -38,7 +37,7 @@ class Todo {
       } else {
         this.completed = false;
       }
-      renderController();
+      completedRenderController();
     });
   }
   changecompleted() {
@@ -52,8 +51,6 @@ function createTodo(title, task, duedate, priority, notes, myTodoList, completed
   todoList.push(newTodo);
   return newTodo;
 }
-
-// createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, myTodoList, getcompleted);
 
 //! DOM Cache Module
 const addBtnEl = document.getElementById("addBtn");
@@ -94,19 +91,20 @@ function getFormInfo() {
 //! Listener Module
 addBtnEl.addEventListener("click", () => {
   getFormInfo();
-  renderController();
+  completedRenderController();
 });
 
 let titleEl = document.createElement("h3");
 let taskEl = document.createElement("div");
 
 //! Render Controller Module
-function renderController() {
+function completedRenderController() {
   removeElements();
   todoList.forEach((todos) => {
     switch (todos.completed) {
       case false: {
-        todoRender(todos);
+        console.log(`path1`);
+        renderController(todos);
         break;
       }
       case true: {
@@ -117,8 +115,45 @@ function renderController() {
   });
 }
 
+//! Render Controller Module
+function renderController(todos) {
+  console.log(`path 1.1`);
+  if (newTodoLists.length === 0) {
+    defaultRender(todos);
+  } else {
+    newTodoLists.forEach((list) => {
+      console.log(`path 1.2`);
+      switch (list.name) {
+        case todos.myTodoList: {
+          console.log("passed");
+          todoRender(list, todos);
+          break;
+        }
+        default: {
+          console.log("Failed");
+          defaultRender(todos);
+          break;
+        }
+      }
+    });
+  }
+}
+
 //! Render Module
-function todoRender(todos) {
+function todoRender(list, todos) {
+  list.listName.appendChild(todos.DOM);
+  todos.titleEl.textContent = todos.title;
+  todos.DOM.appendChild(todos.titleEl);
+  todos.taskEl.textContent = todos.task;
+  todos.DOM.appendChild(todos.taskEl);
+  todos.duedateEl.textContent = todos.duedate;
+  todos.DOM.appendChild(todos.duedateEl);
+  todos.priorityEl.textContent = todos.priority;
+  todos.DOM.appendChild(todos.priorityEl);
+  todos.notesEl.textContent = todos.notes;
+  todos.DOM.appendChild(todos.notesEl);
+}
+function defaultRender(todos) {
   todolistEl.appendChild(todos.DOM);
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
@@ -180,10 +215,10 @@ function getNewFormListInfo() {
 function renderNewList() {
   newTodoLists.forEach((list) => {
     list.sectionEl.textContent = list.name;
-    list.listName.setAttribute("id", `${list.name}list`);
+    list.listName.setAttribute("id", `${list.name}`);
     myLists.prepend(list.listName);
     myLists.prepend(list.sectionEl);
-    list.listOption.setAttribute("value", `${list.name}list`);
+    list.listOption.setAttribute("value", `${list.name}`);
     list.listOption.textContent = list.name;
     todoSelect.appendChild(list.listOption);
   });
@@ -191,12 +226,4 @@ function renderNewList() {
 
 //! Add new List to selection Options
 const todoSelect = document.getElementById("todoSelect");
-
-function newListController() {
-  todoSelect.forEach((list) => {
-    switch (list) {
-      case true: {
-      }
-    }
-  });
-}
+const todoSelectAll = document.querySelectorAll("todoSelect > option");
