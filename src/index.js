@@ -47,6 +47,7 @@ class Todo {
   delBtn() {
     this.delBtnEl.addEventListener("click", () => {
       this.deleted = true;
+      completedRenderController();
     });
   }
   changecompleted() {
@@ -64,8 +65,8 @@ class NewListSection {
 }
 
 //! Create Class variable
-function createTodo(title, task, duedate, priority, notes, myTodoList, completed) {
-  const newTodo = new Todo(title, task, duedate, priority, notes, myTodoList, completed);
+function createTodo(title, task, duedate, priority, notes, myTodoList, completed, deleted) {
+  const newTodo = new Todo(title, task, duedate, priority, notes, myTodoList, completed, deleted);
   newTodo.listener();
   newTodo.delBtn();
   todoList.push(newTodo);
@@ -141,11 +142,25 @@ function completedRenderController() {
         break;
       }
       case true: {
-        completedRender(todos);
+        removeRenderController(todos);
         break;
       }
     }
   });
+}
+
+//! Render Conroller Remove Module
+function removeRenderController(todos) {
+  switch (todos.deleted) {
+    case true: {
+      removeController(todos);
+      break;
+    }
+    case false: {
+      completedRender(todos);
+      break;
+    }
+  }
 }
 
 //! Render Controller Module
@@ -162,6 +177,14 @@ function renderController(todos) {
       }
     });
   }
+}
+
+//! Render Remove Module
+function removeController(todos) {
+  todos.DOM.remove();
+  //Do nothing
+  //Welcome to the void. After 3 days to lazy to
+  //impletement delete function.
 }
 
 //! Render Module
