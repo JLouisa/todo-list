@@ -194,52 +194,27 @@ function removeController(todos) {
 
 //! Render Module
 function todoRender(list, todos) {
-  todos.DOM.setAttribute("class", "cards");
-  todos.inputEl.setAttribute("type", "checkbox");
-  todos.inputEl.setAttribute("id", "checkbox");
-  todos.inputEl.setAttribute("name", "checkbox");
-  todos.inputEl.setAttribute("value", "checked");
-  todos.DOM.appendChild(todos.inputEl);
   list.listName.appendChild(todos.DOM);
-  todos.titleEl.textContent = todos.title;
-  todos.DOM.appendChild(todos.titleEl);
-  todos.taskEl.textContent = todos.task;
-  todos.DOM.appendChild(todos.taskEl);
-  todos.duedateEl.textContent = todos.duedate;
-  todos.DOM.appendChild(todos.duedateEl);
-  todos.priorityEl.textContent = todos.priority;
-  todos.DOM.appendChild(todos.priorityEl);
-  todos.notesEl.textContent = todos.notes;
-  todos.DOM.appendChild(todos.notesEl);
-  todos.delBtnEl.textContent = "X";
+  renderOptimizer(todos);
   todos.delBtnEl.setAttribute("style", "display: none;");
   todos.DOM.appendChild(todos.delBtnEl);
 }
 function defaultRender(todos) {
-  todos.DOM.setAttribute("class", "cards");
   todolistEl.appendChild(todos.DOM);
-  todos.inputEl.setAttribute("type", "checkbox");
-  todos.inputEl.setAttribute("id", "checkbox");
-  todos.inputEl.setAttribute("name", "checkbox");
-  todos.inputEl.setAttribute("value", "checked");
-  todos.DOM.appendChild(todos.inputEl);
-  todos.titleEl.textContent = todos.title;
-  todos.DOM.appendChild(todos.titleEl);
-  todos.taskEl.textContent = todos.task;
-  todos.DOM.appendChild(todos.taskEl);
-  todos.duedateEl.textContent = todos.duedate;
-  todos.DOM.appendChild(todos.duedateEl);
-  todos.priorityEl.textContent = todos.priority;
-  todos.DOM.appendChild(todos.priorityEl);
-  todos.notesEl.textContent = todos.notes;
-  todos.DOM.appendChild(todos.notesEl);
-  todos.delBtnEl.textContent = "X";
+  renderOptimizer(todos);
   todos.delBtnEl.setAttribute("style", "display: none;");
   todos.DOM.appendChild(todos.delBtnEl);
 }
 function completedRender(todos) {
-  todos.DOM.setAttribute("class", "cards");
   completedlist.appendChild(todos.DOM);
+  renderOptimizer(todos);
+  todos.delBtnEl.setAttribute("style", "display: inline;");
+  todos.DOM.appendChild(todos.delBtnEl);
+}
+
+//! Render Optimizer
+function renderOptimizer(todos) {
+  todos.DOM.setAttribute("class", "cards");
   todos.inputEl.setAttribute("type", "checkbox");
   todos.inputEl.setAttribute("id", "checkbox");
   todos.inputEl.setAttribute("name", "checkbox");
@@ -256,8 +231,6 @@ function completedRender(todos) {
   todos.notesEl.textContent = todos.notes;
   todos.DOM.appendChild(todos.notesEl);
   todos.delBtnEl.textContent = "X";
-  todos.delBtnEl.setAttribute("style", "display: inline;");
-  todos.DOM.appendChild(todos.delBtnEl);
 }
 
 //! Render New List
