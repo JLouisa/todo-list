@@ -1,5 +1,3 @@
-// TODO: Create module to add eventlistner
-
 //Test Variables
 let getTitle = "Preperation";
 let gettask = "Send email to John";
@@ -10,10 +8,12 @@ let getMyTodoList = "todolist";
 let getcompleted = false;
 // =====================================================
 
-//Variables
+//! Variables
 let todoList = [];
 let removedList = [];
+let newTodoLists = [];
 
+//! Classes
 class Todo {
   constructor(title, task, duedate, priority, notes, myTodoList, completed) {
     this.title = title;
@@ -44,12 +44,24 @@ class Todo {
     this.completed = true;
   }
 }
+class NewListSection {
+  constructor(name) {
+    this.name = name;
+    this.sectionEl = document.createElement("h1");
+    this.listName = document.createElement("div");
+    this.listOption = document.createElement("option");
+  }
+}
 
+//! Create Class variable
 function createTodo(title, task, duedate, priority, notes, myTodoList, completed) {
   const newTodo = new Todo(title, task, duedate, priority, notes, myTodoList, completed);
   newTodo.listiner();
   todoList.push(newTodo);
   return newTodo;
+}
+function createNewListSection(name) {
+  const newList = new NewListSection(name);
 }
 
 //! DOM Cache Module
@@ -63,8 +75,12 @@ const formTaskeEl = document.getElementById("formTask");
 const datetimeeEl = document.getElementById("datetime-local");
 const formPriorityEl = document.getElementById("formPriority");
 const formNoteseEl = document.getElementById("formNotes");
+const todoSelect = document.getElementById("todoSelect");
+const addNewListSection = document.getElementById("addNewListSection");
+const btnNewListSection = document.getElementById("btnNewListSection");
+const myLists = document.querySelector(".myLists");
 
-//! Remove HtML Elements Module
+//! Remove HTML Elements Module
 function removeElements() {
   const todoListDivsEl = document.querySelectorAll("#todolist > *");
   todoListDivsEl.forEach((divs) => {
@@ -72,7 +88,7 @@ function removeElements() {
   });
 }
 
-//! Fetch From Info Module
+//! Fetch Form Info Module
 function getFormInfo() {
   todoList.push(
     createTodo(
@@ -88,22 +104,29 @@ function getFormInfo() {
   formTodo.reset();
 }
 
-//! Listener Module
+//! Form Info Controller
+function getNewFormListInfo() {
+  newTodoLists.push(new NewListSection(addNewListSection.value));
+  formList.reset();
+  renderNewList();
+}
+
+//! Listen Module
 addBtnEl.addEventListener("click", () => {
   getFormInfo();
   completedRenderController();
 });
+btnNewListSection.addEventListener("click", () => {
+  event.preventDefault();
+  getNewFormListInfo();
+});
 
-let titleEl = document.createElement("h3");
-let taskEl = document.createElement("div");
-
-//! Render Controller Module
+//! Completed Render Controller Module
 function completedRenderController() {
   removeElements();
   todoList.forEach((todos) => {
     switch (todos.completed) {
       case false: {
-        console.log(`path1`);
         renderController(todos);
         break;
       }
@@ -117,20 +140,16 @@ function completedRenderController() {
 
 //! Render Controller Module
 function renderController(todos) {
-  console.log(`path 1.1`);
   if (newTodoLists.length === 0) {
     defaultRender(todos);
   } else {
     newTodoLists.forEach((list) => {
-      console.log(`path 1.2`);
       switch (list.name) {
         case todos.myTodoList: {
-          console.log("passed");
           todoRender(list, todos);
           break;
         }
         default: {
-          console.log("Failed");
           defaultRender(todos);
           break;
         }
@@ -180,38 +199,7 @@ function completedRender(todos) {
   todos.DOM.appendChild(todos.notesEl);
 }
 
-//! New Section Class
-let newTodoLists = [];
-class NewListSection {
-  constructor(name) {
-    this.name = name;
-    this.sectionEl = document.createElement("h1");
-    this.listName = document.createElement("div");
-    this.listOption = document.createElement("option");
-  }
-}
-
-function createNewListSection(name) {
-  const newList = new NewListSection(name);
-}
-
-const addNewListSection = document.getElementById("addNewListSection");
-const btnNewListSection = document.getElementById("btnNewListSection");
-const myLists = document.querySelector(".myLists");
-
-btnNewListSection.addEventListener("click", () => {
-  event.preventDefault();
-  getNewFormListInfo();
-});
-
-function getNewFormListInfo() {
-  console.log(addNewListSection.value);
-  newTodoLists.push(new NewListSection(addNewListSection.value));
-  console.log(newTodoLists);
-  formList.reset();
-  renderNewList();
-}
-
+//! Render New List
 function renderNewList() {
   newTodoLists.forEach((list) => {
     list.sectionEl.textContent = list.name;
@@ -223,7 +211,3 @@ function renderNewList() {
     todoSelect.appendChild(list.listOption);
   });
 }
-
-//! Add new List to selection Options
-const todoSelect = document.getElementById("todoSelect");
-const todoSelectAll = document.querySelectorAll("todoSelect > option");
