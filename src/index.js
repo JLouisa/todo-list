@@ -24,6 +24,7 @@ class Todo {
     this.myTodoList = myTodoList;
     this.completed = completed;
     this.DOM = document.createElement("div");
+    this.inputEl = document.createElement("input");
     this.titleEl = document.createElement("h3");
     this.taskEl = document.createElement("div");
     this.duedateEl = document.createElement("div");
@@ -31,8 +32,8 @@ class Todo {
     this.notesEl = document.createElement("div");
   }
   listener() {
-    this.DOM.addEventListener("click", () => {
-      if (this.completed == false) {
+    this.inputEl.addEventListener("change", () => {
+      if (this.inputEl.checked) {
         this.completed = true;
       } else {
         this.completed = false;
@@ -114,7 +115,6 @@ function getNewFormListInfo() {
 //! Listen Module
 addNewTodoBtnEl.addEventListener("click", () => {
   getFormInfo();
-  // completedRenderController();
 });
 btnNewListSection.addEventListener("click", () => {
   event.preventDefault();
@@ -141,11 +141,13 @@ function completedRenderController() {
 //! Render Controller Module
 function renderController(todos) {
   if (todos.myTodoList == "todolist") {
+    console.log("path 1");
     defaultRender(todos);
   } else {
     newTodoLists.forEach((list) => {
       switch (list.name) {
         case todos.myTodoList: {
+          console.log("path 1");
           todoRender(list, todos);
           break;
         }
@@ -157,6 +159,13 @@ function renderController(todos) {
 //! Render Module
 function todoRender(list, todos) {
   todos.DOM.setAttribute("class", "cards");
+
+  todos.inputEl.setAttribute("type", "checkbox");
+  todos.inputEl.setAttribute("id", "checkbox");
+  todos.inputEl.setAttribute("name", "checkbox");
+  todos.inputEl.setAttribute("value", "checked");
+  todos.DOM.appendChild(todos.inputEl);
+
   list.listName.appendChild(todos.DOM);
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
@@ -172,6 +181,13 @@ function todoRender(list, todos) {
 function defaultRender(todos) {
   todos.DOM.setAttribute("class", "cards");
   todolistEl.appendChild(todos.DOM);
+
+  todos.inputEl.setAttribute("type", "checkbox");
+  todos.inputEl.setAttribute("id", "checkbox");
+  todos.inputEl.setAttribute("name", "checkbox");
+  todos.inputEl.setAttribute("value", "checked");
+  todos.DOM.appendChild(todos.inputEl);
+
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
   todos.taskEl.textContent = todos.task;
@@ -186,6 +202,13 @@ function defaultRender(todos) {
 function completedRender(todos) {
   todos.DOM.setAttribute("class", "cards");
   completedlist.appendChild(todos.DOM);
+
+  todos.inputEl.setAttribute("type", "checkbox");
+  todos.inputEl.setAttribute("id", "checkbox");
+  todos.inputEl.setAttribute("name", "checkbox");
+  todos.inputEl.setAttribute("value", "checked");
+  todos.DOM.appendChild(todos.inputEl);
+
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
   todos.taskEl.textContent = todos.task;
