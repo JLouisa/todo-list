@@ -34,6 +34,10 @@ class Todo {
     this.notesEl = document.createElement("div");
     this.delBtnEl = document.createElement("button");
   }
+  findIndex() {
+    // <-------------------
+    console.log(todoList.indexOf(this));
+  }
   listener() {
     this.inputEl.addEventListener("change", () => {
       if (this.inputEl.checked) {
@@ -70,6 +74,7 @@ function createTodo(title, task, duedate, priority, notes, myTodoList, completed
   newTodo.listener();
   newTodo.delBtn();
   todoList.push(newTodo);
+  newTodo.findIndex();
   return newTodo;
 }
 function createNewListSection(name) {
