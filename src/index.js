@@ -141,6 +141,7 @@ class NewListSection {
     this.name = name;
     this.sectionEl = document.createElement("h1");
     this.listName = document.createElement("div");
+    this.listOption = document.createElement("option");
   }
 }
 
@@ -168,9 +169,15 @@ function getNewFormListInfo() {
 function renderNewList() {
   newTodoLists.forEach((list) => {
     list.sectionEl.textContent = list.name;
-    // list.listName.classList.add = `${list.name}list`;
+    // list.listName.classList.add = `${list.name}list`; //didn't work
     list.listName.setAttribute("id", `${list.name}list`);
     myLists.prepend(list.listName);
     myLists.prepend(list.sectionEl);
+    list.listOption.setAttribute("value", `${list.name}list`);
+    list.listOption.textContent = list.name;
+    todoSelect.appendChild(list.listOption);
   });
 }
+
+//! Add new List to selection Options
+const todoSelect = document.getElementById("todoSelect");
