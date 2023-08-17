@@ -23,9 +23,18 @@
                 <label for="formDueDate">Due Date</label>
                 <input type="datetime-local" id="datetime-local" name="datetime-local">
                 <label for="formPriority">Priority</label>
-                <input type="text" id="formPriority" name="formPriority">
+                <select id="formPriority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
                 <label for="formNotes">Notes</label>
                 <input type="textarea" id="formNotes" name="formNotes" rows="10" cols="50">
+                <label for="formPriority">Todo List</label>
+                <select id="todoSelect">
+                    <option value="">--Please choose an option--</option>
+                    <option value="todo1">Your Todo List</option>
+                </select>
             </form>
             <button id="addBtn">Add Todo</button>
             <h1>Your Todo List:</h1>
