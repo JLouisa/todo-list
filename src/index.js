@@ -47,7 +47,8 @@ class Todo {
 class NewListSection {
   constructor(name) {
     this.name = name;
-    this.sectionEl = document.createElement("h1");
+    this.listSection = document.createElement("div");
+    this.sectiontitleEl = document.createElement("h1");
     this.listName = document.createElement("div");
     this.listOption = document.createElement("option");
   }
@@ -160,6 +161,7 @@ function renderController(todos) {
 
 //! Render Module
 function todoRender(list, todos) {
+  todos.DOM.setAttribute("class", "cards");
   list.listName.appendChild(todos.DOM);
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
@@ -173,6 +175,7 @@ function todoRender(list, todos) {
   todos.DOM.appendChild(todos.notesEl);
 }
 function defaultRender(todos) {
+  todos.DOM.setAttribute("class", "cards");
   todolistEl.appendChild(todos.DOM);
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
@@ -186,6 +189,7 @@ function defaultRender(todos) {
   todos.DOM.appendChild(todos.notesEl);
 }
 function completedRender(todos) {
+  todos.DOM.setAttribute("class", "cards");
   completedlist.appendChild(todos.DOM);
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
@@ -202,10 +206,11 @@ function completedRender(todos) {
 //! Render New List
 function renderNewList() {
   newTodoLists.forEach((list) => {
-    list.sectionEl.textContent = list.name;
+    list.sectiontitleEl.textContent = list.name;
     list.listName.setAttribute("id", `${list.name}`);
-    myLists.prepend(list.listName);
-    myLists.prepend(list.sectionEl);
+    myLists.prepend(list.listSection);
+    list.listSection.appendChild(list.sectiontitleEl);
+    list.listSection.appendChild(list.listName);
     list.listOption.setAttribute("value", `${list.name}`);
     list.listOption.textContent = list.name;
     todoSelect.appendChild(list.listOption);
