@@ -6,6 +6,7 @@ let gettask = "Send email to John";
 let getdueDate = "Next friday";
 let getpriority = "Low";
 let getNotes = "Plan in a meeting for the report";
+let getMyTodoList = "todolist";
 let getcompleted = false;
 
 // =====================================================
@@ -15,12 +16,13 @@ let todoList = [];
 let removedList = [];
 
 class Todo {
-  constructor(title, task, duedate, priority, notes, completed) {
+  constructor(title, task, duedate, priority, notes, myTodoList, completed) {
     this.title = title;
     this.task = task;
     this.duedate = duedate;
     this.priority = priority;
     this.notes = notes;
+    this.myTodoList = myTodoList;
     this.completed = completed;
     this.DOM = document.createElement("div");
     this.titleEl = document.createElement("h3");
@@ -44,20 +46,21 @@ class Todo {
   }
 }
 
-function createTodo(title, task, duedate, priority, notes, completed) {
-  const newTodo = new Todo(title, task, duedate, priority, notes, completed);
+function createTodo(title, task, duedate, priority, notes, myTodoList, completed) {
+  const newTodo = new Todo(title, task, duedate, priority, notes, myTodoList, completed);
   newTodo.listiner();
   todoList.push(newTodo);
   return newTodo;
 }
 
-createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, getcompleted);
+// createTodo(getTitle, gettask, getdueDate, getpriority, getNotes, myTodoList, getcompleted);
 
 //! DOM Cache Module
 const addBtnEl = document.getElementById("addBtn");
 const todolistEl = document.getElementById("todolist");
 const completedlist = document.getElementById("completedlist");
-const form = document.querySelector("form");
+const formTodo = document.getElementById("formTodo");
+const formList = document.getElementById("formList");
 const formTitleEl = document.getElementById("formTitle");
 const formTaskeEl = document.getElementById("formTask");
 const datetimeeEl = document.getElementById("datetime-local");
@@ -72,12 +75,20 @@ function removeElements() {
   });
 }
 
-//!Fetch From Info Module
+//! Fetch From Info Module
 function getFormInfo() {
   todoList.push(
-    createTodo(formTitleEl.value, formTaskeEl.value, datetimeeEl.value, formPriorityEl.value, formNoteseEl.value, false)
+    createTodo(
+      formTitleEl.value,
+      formTaskeEl.value,
+      datetimeeEl.value,
+      formPriorityEl.value,
+      formNoteseEl.value,
+      todoSelect.value,
+      false
+    )
   );
-  form.reset();
+  formTodo.reset();
 }
 
 //! Listener Module
@@ -162,14 +173,13 @@ function getNewFormListInfo() {
   console.log(addNewListSection.value);
   newTodoLists.push(new NewListSection(addNewListSection.value));
   console.log(newTodoLists);
-  form.reset();
+  formList.reset();
   renderNewList();
 }
 
 function renderNewList() {
   newTodoLists.forEach((list) => {
     list.sectionEl.textContent = list.name;
-    // list.listName.classList.add = `${list.name}list`; //didn't work
     list.listName.setAttribute("id", `${list.name}list`);
     myLists.prepend(list.listName);
     myLists.prepend(list.sectionEl);
@@ -181,3 +191,12 @@ function renderNewList() {
 
 //! Add new List to selection Options
 const todoSelect = document.getElementById("todoSelect");
+
+function newListController() {
+  todoSelect.forEach((list) => {
+    switch (list) {
+      case true: {
+      }
+    }
+  });
+}

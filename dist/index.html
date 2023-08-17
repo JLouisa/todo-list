@@ -11,7 +11,7 @@
     <nav>
         <div class="navBar">
             <h1>Title</h1>
-            <form>
+            <form id="formList">
                 <label for="addNewListSection">New List</label>
                 <input type="text" id="addNewListSection" name="addNewListSection">
                 <button id="btnNewListSection" type="submit">Add</button>
@@ -21,7 +21,7 @@
     <div class="main">
         <div id="content"></div>
         <div>
-            <form action="">
+            <form id="formTodo">
                 <label for="formTitle">Title</label><input type="text" id="formTitle" name="formTitle">
                 <label for="formTask">Task</label>
                 <input type="text" id="formTask" name="formTask">
@@ -38,14 +38,16 @@
                 <label for="formPriority">Todo List</label>
                 <select id="todoSelect">
                     <option value="">--Please choose an option--</option>
-                    <option value="todo1">Your Todo List</option>
+                    <option value="todolist">Your Todo List</option>
                 </select>
             </form>
             <button id="addBtn">Add Todo</button>
-            <h1>Your Todo List:</h1>
-            <div id="todolist"></div>
-            <h1>Your Completed List:</h1>
-            <div id="completedlist"></div>
+            <div class="myLists">
+                <h1>Your Todo List:</h1>
+                <div id="todolist"></div>
+                <h1>Your Completed List:</h1>
+                <div id="completedlist"></div>
+            </div>
         </div>
     </div>
     </div>
