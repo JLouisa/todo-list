@@ -6,6 +6,7 @@ let getpriority = "Low";
 let getNotes = "Plan in a meeting for the report";
 let getMyTodoList = "todolist";
 let getcompleted = false;
+let getdeleted = false;
 // =====================================================
 
 //! Variables
@@ -15,7 +16,7 @@ let newTodoLists = [];
 
 //! Classes
 class Todo {
-  constructor(title, task, duedate, priority, notes, myTodoList, completed) {
+  constructor(title, task, duedate, priority, notes, myTodoList, completed, deleted) {
     this.title = title;
     this.task = task;
     this.duedate = duedate;
@@ -23,6 +24,7 @@ class Todo {
     this.notes = notes;
     this.myTodoList = myTodoList;
     this.completed = completed;
+    this.deleted = deleted;
     this.DOM = document.createElement("div");
     this.inputEl = document.createElement("input");
     this.titleEl = document.createElement("h3");
@@ -30,6 +32,7 @@ class Todo {
     this.duedateEl = document.createElement("div");
     this.priorityEl = document.createElement("div");
     this.notesEl = document.createElement("div");
+    this.delBtnEl = document.createElement("button");
   }
   listener() {
     this.inputEl.addEventListener("change", () => {
@@ -39,6 +42,11 @@ class Todo {
         this.completed = false;
       }
       completedRenderController();
+    });
+  }
+  delBtn() {
+    this.delBtnEl.addEventListener("click", () => {
+      this.deleted = true;
     });
   }
   changecompleted() {
@@ -59,6 +67,7 @@ class NewListSection {
 function createTodo(title, task, duedate, priority, notes, myTodoList, completed) {
   const newTodo = new Todo(title, task, duedate, priority, notes, myTodoList, completed);
   newTodo.listener();
+  newTodo.delBtn();
   todoList.push(newTodo);
   return newTodo;
 }
@@ -99,6 +108,7 @@ function getFormInfo() {
     formPriorityEl.value,
     formNoteseEl.value,
     todoSelect.value,
+    false,
     false
   );
   formTodo.reset();
@@ -157,13 +167,11 @@ function renderController(todos) {
 //! Render Module
 function todoRender(list, todos) {
   todos.DOM.setAttribute("class", "cards");
-
   todos.inputEl.setAttribute("type", "checkbox");
   todos.inputEl.setAttribute("id", "checkbox");
   todos.inputEl.setAttribute("name", "checkbox");
   todos.inputEl.setAttribute("value", "checked");
   todos.DOM.appendChild(todos.inputEl);
-
   list.listName.appendChild(todos.DOM);
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
@@ -175,17 +183,18 @@ function todoRender(list, todos) {
   todos.DOM.appendChild(todos.priorityEl);
   todos.notesEl.textContent = todos.notes;
   todos.DOM.appendChild(todos.notesEl);
+  todos.delBtnEl.textContent = "X";
+  todos.delBtnEl.setAttribute("style", "display: none;");
+  todos.DOM.appendChild(todos.delBtnEl);
 }
 function defaultRender(todos) {
   todos.DOM.setAttribute("class", "cards");
   todolistEl.appendChild(todos.DOM);
-
   todos.inputEl.setAttribute("type", "checkbox");
   todos.inputEl.setAttribute("id", "checkbox");
   todos.inputEl.setAttribute("name", "checkbox");
   todos.inputEl.setAttribute("value", "checked");
   todos.DOM.appendChild(todos.inputEl);
-
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
   todos.taskEl.textContent = todos.task;
@@ -196,17 +205,18 @@ function defaultRender(todos) {
   todos.DOM.appendChild(todos.priorityEl);
   todos.notesEl.textContent = todos.notes;
   todos.DOM.appendChild(todos.notesEl);
+  todos.delBtnEl.textContent = "X";
+  todos.delBtnEl.setAttribute("style", "display: none;");
+  todos.DOM.appendChild(todos.delBtnEl);
 }
 function completedRender(todos) {
   todos.DOM.setAttribute("class", "cards");
   completedlist.appendChild(todos.DOM);
-
   todos.inputEl.setAttribute("type", "checkbox");
   todos.inputEl.setAttribute("id", "checkbox");
   todos.inputEl.setAttribute("name", "checkbox");
   todos.inputEl.setAttribute("value", "checked");
   todos.DOM.appendChild(todos.inputEl);
-
   todos.titleEl.textContent = todos.title;
   todos.DOM.appendChild(todos.titleEl);
   todos.taskEl.textContent = todos.task;
@@ -217,6 +227,9 @@ function completedRender(todos) {
   todos.DOM.appendChild(todos.priorityEl);
   todos.notesEl.textContent = todos.notes;
   todos.DOM.appendChild(todos.notesEl);
+  todos.delBtnEl.textContent = "X";
+  todos.delBtnEl.setAttribute("style", "display: inline;");
+  todos.DOM.appendChild(todos.delBtnEl);
 }
 
 //! Render New List
