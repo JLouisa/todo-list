@@ -146,3 +146,18 @@ class NewListSection {
 function createNewListSection(name) {
   const newList = new NewListSection(name);
 }
+
+const addNewListSection = document.getElementById("addNewListSection");
+const btnNewListSection = document.getElementById("btnNewListSection");
+btnNewListSection.addEventListener("click", () => {
+  event.preventDefault();
+  getNewFormListInfo();
+  // validateMyForm();
+});
+
+function getNewFormListInfo() {
+  console.log(addNewListSection.value);
+  const newList = new NewListSection(addNewListSection.value);
+  console.log(newList);
+  form.reset();
+}
