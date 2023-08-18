@@ -157,10 +157,9 @@ function removeElements() {
   });
 }
 
-//! Fetch Form Info Controller
-//* Todos
-function getFormInfo() {
-  createTodo(
+//! Listen Module
+addNewTodoBtnEl.addEventListener("click", () => {
+  getFormInfo(
     formTitleEl.value,
     formTaskeEl.value,
     datetimeeEl.value,
@@ -170,26 +169,29 @@ function getFormInfo() {
     false,
     false
   );
+});
+btnNewListSection.addEventListener("click", () => {
+  event.preventDefault();
+  getNewFormListInfo(newTodoLists, addNewListSection.value);
+});
+cancelbtnNewListSection.addEventListener("click", useCancel);
+cancelBtn.addEventListener("click", useCancel);
+
+//! Fetch Form Info Controller
+//* Todos
+function getFormInfo(title, task, dateTime, priority, notes, todoSelect, completed, deleted) {
+  createTodo(title, task, dateTime, priority, notes, todoSelect, completed, deleted);
+  saveTodoToLocalStorage(title, task, dateTime, priority, notes, todoSelect, completed, deleted);
   formTodo.reset();
   completedRenderController();
 }
 //* List
-function getNewFormListInfo() {
-  newTodoLists.push(new NewListSection(addNewListSection.value));
+function getNewFormListInfo(list, items) {
+  list.push(new NewListSection(items));
+  saveListToLocalStorage(items);
   formList.reset();
   renderNewList();
 }
-
-//! Listen Module
-addNewTodoBtnEl.addEventListener("click", () => {
-  getFormInfo();
-});
-btnNewListSection.addEventListener("click", () => {
-  event.preventDefault();
-  getNewFormListInfo();
-});
-cancelbtnNewListSection.addEventListener("click", useCancel);
-cancelBtn.addEventListener("click", useCancel);
 
 //! Completed Render Controller Module
 function completedRenderController() {
@@ -326,24 +328,73 @@ function useCancel() {
 }
 
 //! Local Storage Module
-function mylocalStorage() {
-  localStorage.setItem("newTodoLists", JSON.stringify(newTodoLists));
-  console.log(JSON.parse(localStorage.getItem("newTodoLists"))); // { name: "Alex" }
+let listLocalStorage = [];
+let savedList = [];
+let todoLocalStorage = [];
+let savedTodo = [];
+let savedTodoFile = [];
 
-  localStorage.setItem("todoList", JSON.stringify(todoList));
-  console.log(JSON.parse(localStorage.getItem("todoList"))); // { name: "Alex" }
+// function mylocalStorage() {
+//   localStorage.setItem("newTodoLists", JSON.stringify(newTodoLists));
+//   console.log(JSON.parse(localStorage.getItem("newTodoLists"))); // { name: "Alex" }
+
+//   localStorage.setItem("todoList", JSON.stringify(todoList));
+//   console.log(JSON.parse(localStorage.getItem("todoList"))); // { name: "Alex" }
+// }
+
+//! List Storage Module
+function saveTodoToLocalStorage(title, task, duedate, priority, notes, myTodoList, completed, deleted) {
+  todoLocalStorage.push(
+    (savedTodoFile = {
+      title: title,
+      task: task,
+      duedate: duedate,
+      priority: priority,
+      notes: notes,
+      myTodoList: myTodoList,
+      completed: completed,
+      deleted: deleted,
+    })
+  );
+  localStorage.setItem("todos", JSON.stringify(todoLocalStorage));
+}
+function loadTodoFromLocalStorage() {
+  savedTodo = JSON.parse(localStorage.getItem("todos"));
+}
+function loadTodo() {
+  loadTodoFromLocalStorage();
+  savedTodo.forEach((list) => {
+    getFormInfo(
+      list.title,
+      list.task,
+      list.duedate,
+      list.priority,
+      list.notes,
+      list.myTodoList,
+      list.completed,
+      list.deleted
+    );
+  });
 }
 
-function saveToLocalStorage() {}
-
-function loadFromLocalStorage() {}
-
-let savedMem = ["Projects", "Meetings", "Chores", "Reports"];
-
-function createlist() {
-  savedMem.forEach((list) => {
-    newTodoLists.push(new NewListSection(list));
+//! List Storage Module
+function saveListToLocalStorage(list) {
+  listLocalStorage.push(list);
+  localStorage.setItem("todoList", JSON.stringify(listLocalStorage));
+}
+function loadListFromLocalStorage() {
+  savedList = JSON.parse(localStorage.getItem("todoList"));
+}
+function loadList() {
+  loadListFromLocalStorage();
+  savedList.forEach((list) => {
+    getNewFormListInfo(newTodoLists, list);
   });
-  formList.reset();
-  renderNewList();
+}
+//* Create info
+let createFastList = ["Meeting", "Movies", "Chores", "Reports", "Conference"];
+function createListFast() {
+  createFastList.forEach((items) => {
+    getNewFormListInfo(newTodoLists, items);
+  });
 }
