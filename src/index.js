@@ -110,10 +110,18 @@ class NewListSection {
     this.listOption = document.createElement("option");
     this.editBtnEl = document.createElement("div");
     this.groupEl = document.createElement("div");
+    this.delListBtn = document.createElement("button");
   }
   editListBtn() {
     this.editBtnEl.addEventListener("click", () => {
-      console.log("Give delete option");
+      this.delListBtn.setAttribute("style", "display: inline");
+    });
+  }
+  delListBtn2() {
+    this.delListBtn.addEventListener("click", () => {
+      // console.log(newTodoLists.indexOf(this));
+      this.listSection.remove();
+      removeControllerList(newTodoLists.indexOf(this), newTodoLists);
     });
   }
 }
@@ -133,6 +141,7 @@ function createNewListSection(name, list) {
   const newList = new NewListSection(name);
   list.push(newList);
   newList.editListBtn();
+  newList.delListBtn2();
 }
 
 //! DOM Cache Module
@@ -248,7 +257,9 @@ function removeController(index, todos) {
   todos.DOM.remove();
   removedList.push(todos);
   todoList.splice(index, 1);
-  console.log(removedList);
+}
+function removeControllerList(index, list) {
+  list.splice(index, 1);
 }
 
 //! Render Module
@@ -309,14 +320,19 @@ function listRenderController(items) {
 //! Render New List
 function renderNewList() {
   newTodoLists.forEach((list) => {
-    list.sectiontitleEl.textContent = list.name;
-    list.listSection.setAttribute("class", "list");
-    list.listName.setAttribute("id", list.name);
     myLists.prepend(list.listSection);
-    list.editBtnEl.textContent = "⋮";
+    list.listSection.setAttribute("class", "list");
     list.listSection.appendChild(list.groupEl);
+    list.sectiontitleEl.textContent = list.name;
     list.groupEl.appendChild(list.sectiontitleEl);
+    list.editBtnEl.textContent = "⋮";
     list.groupEl.appendChild(list.editBtnEl);
+
+    list.delListBtn.textContent = "Delete";
+    list.delListBtn.setAttribute("style", "display: none");
+    list.groupEl.appendChild(list.delListBtn);
+
+    list.listName.setAttribute("id", list.name);
     list.listSection.appendChild(list.listName);
     list.listOption.setAttribute("value", list.name);
     list.listOption.textContent = list.name;
