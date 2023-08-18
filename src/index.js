@@ -111,6 +111,11 @@ class NewListSection {
     this.editBtnEl = document.createElement("div");
     this.groupEl = document.createElement("div");
   }
+  editListBtn() {
+    this.editBtnEl.addEventListener("click", () => {
+      console.log("Give delete option");
+    });
+  }
 }
 
 //! Create Class variable
@@ -124,8 +129,10 @@ function createTodo(title, task, duedate, priority, notes, myTodoList, completed
   newTodo.cancelBtnTodo();
   return newTodo;
 }
-function createNewListSection(name) {
+function createNewListSection(name, list) {
   const newList = new NewListSection(name);
+  list.push(newList);
+  newList.editListBtn();
 }
 
 //! DOM Cache Module
@@ -168,7 +175,6 @@ addNewTodoBtnEl.addEventListener("click", () => {
   );
 });
 btnNewListSection.addEventListener("click", () => {
-  event.preventDefault();
   getNewFormListInfo(newTodoLists, addNewListSection.value);
 });
 cancelbtnNewListSection.addEventListener("click", useCancel);
@@ -178,15 +184,15 @@ cancelBtn.addEventListener("click", useCancel);
 //* Todos
 function getFormInfo(title, task, dateTime, priority, notes, todoSelect, completed, deleted) {
   createTodo(title, task, dateTime, priority, notes, todoSelect, completed, deleted);
-  // saveTodoToLocalStorage(title, task, dateTime, priority, notes, todoSelect, completed, deleted);
   formTodo.reset();
   completedRenderController();
 }
 //* List
 function getNewFormListInfo(list, items) {
-  list.push(new NewListSection(items));
+  createNewListSection(items, list);
   formList.reset();
   listRenderController(items);
+  console.log(items);
 }
 
 //! Completed Render Controller Module
