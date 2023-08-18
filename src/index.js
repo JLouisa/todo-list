@@ -35,6 +35,7 @@ class Todo {
     this.delBtnEl = document.createElement("button");
     this.addBtnEl = document.createElement("button");
     this.editBtnEl = document.createElement("div");
+    this.cancelBtnEl = document.createElement("button");
   }
   findIndex() {
     // <-------------------
@@ -58,7 +59,10 @@ class Todo {
       formPriorityEl.setAttribute("value", this.priority);
       formNoteseEl.setAttribute("value", this.notes);
       todoSelect.setAttribute("value", this.myTodoList);
+      addBtn.setAttribute("style", "display: none;");
       this.addBtnEl.setAttribute("style", "display: inline;");
+      cancelBtn.setAttribute("style", "display: none;");
+      this.cancelBtnEl.setAttribute("style", "display: inline;");
     });
   }
   addBtn() {
@@ -77,6 +81,10 @@ class Todo {
       todoSelect.removeAttribute("value");
       formTodo.reset();
       this.addBtnEl.setAttribute("style", "display: none;");
+      addBtn.setAttribute("style", "display: inline;");
+      cancelBtn.setAttribute("style", "display: inline;");
+      this.cancelBtnEl.setAttribute("style", "display: none;");
+
       completedRenderController();
     });
   }
@@ -86,6 +94,14 @@ class Todo {
       completedRenderController();
     });
   }
+  cancelBtnTodo() {
+    this.cancelBtnEl.addEventListener("click", () => {
+      this.addBtnEl.setAttribute("style", "display: none;");
+      this.cancelBtnEl.setAttribute("style", "display: none;");
+      useCancel();
+    });
+  }
+
   changecompleted() {
     this.completed = true;
   }
@@ -109,6 +125,7 @@ function createTodo(title, task, duedate, priority, notes, myTodoList, completed
   newTodo.findIndex();
   newTodo.editBtn();
   newTodo.addBtn();
+  newTodo.cancelBtnTodo();
   return newTodo;
 }
 function createNewListSection(name) {
@@ -130,6 +147,8 @@ const todoSelect = document.getElementById("todoSelect");
 const addNewListSection = document.getElementById("addNewListSection");
 const btnNewListSection = document.getElementById("btnNewListSection");
 const myLists = document.querySelector(".myLists");
+const cancelbtnNewListSection = document.getElementById("cancelbtnNewListSection");
+const cancelBtn = document.getElementById("cancelBtn");
 
 //! Remove HTML Elements Module
 function removeElements() {
@@ -170,6 +189,8 @@ btnNewListSection.addEventListener("click", () => {
   event.preventDefault();
   getNewFormListInfo();
 });
+cancelbtnNewListSection.addEventListener("click", useCancel);
+cancelBtn.addEventListener("click", useCancel);
 
 //! Completed Render Controller Module
 function completedRenderController() {
@@ -266,9 +287,12 @@ function renderOptimizer(todos) {
   todos.DOM.appendChild(todos.notesEl);
   todos.editBtnEl.textContent = "⋮";
   todos.DOM.appendChild(todos.editBtnEl);
-  todos.addBtnEl.textContent = "Add";
+  todos.addBtnEl.textContent = "Edit";
   todos.addBtnEl.setAttribute("style", "display: none;");
   addNewTodoBtnEl.insertAdjacentElement("afterend", todos.addBtnEl);
+  todos.cancelBtnEl.textContent = "Cancel";
+  todos.cancelBtnEl.setAttribute("style", "display: none;");
+  todos.addBtnEl.insertAdjacentElement("afterend", todos.cancelBtnEl);
   todos.delBtnEl.textContent = "X";
 }
 
@@ -287,45 +311,17 @@ function renderNewList() {
   });
 }
 
-//! Test Form information retrieval
-const getNameTestEl = document.getElementById("name");
-const getAgeTestEl = document.getElementById("age");
-const getDateTestEl = document.getElementById("dateTest");
-const formTest = document.getElementById("formTest");
-const getBtnTestEl = document.getElementById("getBtnTest");
-const showBtnTestEl = document.getElementById("showBtnTest");
-const resetBtnTestEl = document.getElementById("resetBtnTest");
-
-let objectTest = {
-  name: "",
-  age: "",
-  date: "",
-};
-
-getBtnTestEl.addEventListener("click", getTestInfo);
-
-function getTestInfo() {
-  objectTest.name = getNameTestEl.value;
-  objectTest.age = getAgeTestEl.value;
-  objectTest.date = getDateTestEl.value;
-  console.log(objectTest);
-  getAgeTestEl.removeAttribute("value");
-  getNameTestEl.removeAttribute("value");
-  getDateTestEl.removeAttribute("value");
-  formTest.reset();
+//! Cancel functionality
+function useCancel() {
+  formTitleEl.removeAttribute("value");
+  formTaskeEl.removeAttribute("value");
+  datetimeeEl.removeAttribute("value");
+  formPriorityEl.removeAttribute("value");
+  formNoteseEl.removeAttribute("value");
+  todoSelect.removeAttribute("value");
+  addNewListSection.removeAttribute("value");
+  addBtn.setAttribute("style", "display: inline;");
+  cancelBtn.setAttribute("style", "display: inline;");
+  formTodo.reset();
+  formList.reset();
 }
-
-showBtnTestEl.addEventListener("click", showTestInfo);
-
-function showTestInfo() {
-  getNameTestEl.setAttribute("value", objectTest.name);
-  getAgeTestEl.setAttribute("value", objectTest.age);
-  getDateTestEl.setAttribute("value", objectTest.date);
-}
-
-resetBtnTestEl.addEventListener("click", () => {
-  getAgeTestEl.removeAttribute("value");
-  getNameTestEl.removeAttribute("value");
-  getDateTestEl.removeAttribute("value");
-  formTest.reset();
-});
