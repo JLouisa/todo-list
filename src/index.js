@@ -61,6 +61,25 @@ class Todo {
       this.addBtnEl.setAttribute("style", "display: inline;");
     });
   }
+  addBtn() {
+    this.addBtnEl.addEventListener("click", () => {
+      (this.title = formTitleEl.value),
+        (this.task = formTaskeEl.value),
+        (this.duedate = datetimeeEl.value),
+        (this.priority = formPriorityEl.value),
+        (this.notes = formNoteseEl.value),
+        (this.myTodoList = todoSelect.value);
+      formTitleEl.removeAttribute("value");
+      formTaskeEl.removeAttribute("value");
+      datetimeeEl.removeAttribute("value");
+      formPriorityEl.removeAttribute("value");
+      formNoteseEl.removeAttribute("value");
+      todoSelect.removeAttribute("value");
+      formTodo.reset();
+      this.addBtnEl.setAttribute("style", "display: none;");
+      completedRenderController();
+    });
+  }
   delBtn() {
     this.delBtnEl.addEventListener("click", () => {
       this.deleted = true;
@@ -89,6 +108,7 @@ function createTodo(title, task, duedate, priority, notes, myTodoList, completed
   todoList.push(newTodo);
   newTodo.findIndex();
   newTodo.editBtn();
+  newTodo.addBtn();
   return newTodo;
 }
 function createNewListSection(name) {
