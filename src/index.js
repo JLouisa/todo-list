@@ -247,3 +247,46 @@ function renderNewList() {
     todoSelect.appendChild(list.listOption);
   });
 }
+
+//! Test Form information retrieval
+const getNameTestEl = document.getElementById("name");
+const getAgeTestEl = document.getElementById("age");
+const getDateTestEl = document.getElementById("dateTest");
+const formTest = document.getElementById("formTest");
+const getBtnTestEl = document.getElementById("getBtnTest");
+const showBtnTestEl = document.getElementById("showBtnTest");
+const resetBtnTestEl = document.getElementById("resetBtnTest");
+
+let objectTest = {
+  name: "",
+  age: "",
+  date: "",
+};
+
+getBtnTestEl.addEventListener("click", getTestInfo);
+
+function getTestInfo() {
+  objectTest.name = getNameTestEl.value;
+  objectTest.age = getAgeTestEl.value;
+  objectTest.date = getDateTestEl.value;
+  console.log(objectTest);
+  getAgeTestEl.removeAttribute("value");
+  getNameTestEl.removeAttribute("value");
+  getDateTestEl.removeAttribute("value");
+  formTest.reset();
+}
+
+showBtnTestEl.addEventListener("click", showTestInfo);
+
+function showTestInfo() {
+  getNameTestEl.setAttribute("value", objectTest.name);
+  getAgeTestEl.setAttribute("value", objectTest.age);
+  getDateTestEl.setAttribute("value", objectTest.date);
+}
+
+resetBtnTestEl.addEventListener("click", () => {
+  getAgeTestEl.removeAttribute("value");
+  getNameTestEl.removeAttribute("value");
+  getDateTestEl.removeAttribute("value");
+  formTest.reset();
+});
