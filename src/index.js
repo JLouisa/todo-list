@@ -119,7 +119,6 @@ class NewListSection {
   }
   delListBtn2() {
     this.delListBtn.addEventListener("click", () => {
-      // console.log(newTodoLists.indexOf(this));
       this.listSection.remove();
       removeControllerList(newTodoLists.indexOf(this), newTodoLists);
     });
@@ -200,8 +199,7 @@ function getFormInfo(title, task, dateTime, priority, notes, todoSelect, complet
 function getNewFormListInfo(list, items) {
   createNewListSection(items, list);
   formList.reset();
-  listRenderController(items);
-  console.log(items);
+  listRenderController();
 }
 
 //! Completed Render Controller Module
@@ -260,6 +258,7 @@ function removeController(index, todos) {
 }
 function removeControllerList(index, list) {
   list.splice(index, 1);
+  listRenderController();
 }
 
 //! Render Module
@@ -312,9 +311,9 @@ function renderOptimizer(todos) {
 }
 
 //! List Render Controller
-function listRenderController(items) {
+function listRenderController() {
   renderNewList();
-  saveListToLocalStorage(items);
+  saveListToLocalStorage();
 }
 
 //! Render New List
@@ -327,11 +326,9 @@ function renderNewList() {
     list.groupEl.appendChild(list.sectiontitleEl);
     list.editBtnEl.textContent = "⋮";
     list.groupEl.appendChild(list.editBtnEl);
-
     list.delListBtn.textContent = "Delete";
     list.delListBtn.setAttribute("style", "display: none");
     list.groupEl.appendChild(list.delListBtn);
-
     list.listName.setAttribute("id", list.name);
     list.listSection.appendChild(list.listName);
     list.listOption.setAttribute("value", list.name);
@@ -361,7 +358,7 @@ let savedList = [];
 let todoLocalStorage;
 let savedTodo = [];
 
-//! List Storage Module
+//! Todo Storage Module
 function saveTodoToLocalStorage(thelist) {
   todoLocalStorage = [...thelist];
   localStorage.setItem("todos", JSON.stringify(todoLocalStorage));
@@ -386,17 +383,20 @@ function loadTodo() {
 }
 
 //! List Storage Module
-function saveListToLocalStorage(list) {
-  listLocalStorage.push(list);
+function saveListToLocalStorage() {
+  listLocalStorage = [...newTodoLists];
+  // console.log(newTodoLists);
   localStorage.setItem("todoList", JSON.stringify(listLocalStorage));
 }
 function loadListFromLocalStorage() {
   savedList = JSON.parse(localStorage.getItem("todoList"));
+  console.log("savedList");
+  console.log(savedList);
 }
 function loadList() {
   loadListFromLocalStorage();
-  savedList.forEach((list) => {
-    getNewFormListInfo(newTodoLists, list);
+  savedList.forEach((items) => {
+    getNewFormListInfo(newTodoLists, items.name);
   });
 }
 //* Create info
