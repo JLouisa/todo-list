@@ -392,3 +392,10 @@ function doTest() {
 function createTodoFast() {
   getFormInfo(getTitle, gettask, getdueDate, getpriority, getNotes, getMyTodoList, getcompleted, getdeleted);
 }
+
+if (localStorage.todoList) {
+  loadList();
+}
+if (localStorage.todos) {
+  loadTodo();
+}
