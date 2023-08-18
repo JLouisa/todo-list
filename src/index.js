@@ -38,10 +38,6 @@ class Todo {
     this.editBtnEl = document.createElement("div");
     this.cancelBtnEl = document.createElement("button");
   }
-  findIndex() {
-    // <-------------------
-    console.log(todoList.indexOf(this));
-  }
   listener() {
     this.inputEl.addEventListener("change", () => {
       if (this.inputEl.checked) {
@@ -121,7 +117,6 @@ function createTodo(title, task, duedate, priority, notes, myTodoList, completed
   newTodo.listener();
   newTodo.delBtn();
   todoList.push(newTodo);
-  newTodo.findIndex();
   newTodo.editBtn();
   newTodo.addBtn();
   newTodo.cancelBtnTodo();
@@ -214,7 +209,8 @@ function completedRenderController() {
 function removeRenderController(todos) {
   switch (todos.deleted) {
     case true: {
-      removeController(todos);
+      // removeController(todos);
+      removeController(todoList.indexOf(todos), todos);
       break;
     }
     case false: {
@@ -241,11 +237,11 @@ function renderController(todos) {
 }
 
 //! Render Remove Module
-function removeController(todos) {
+function removeController(index, todos) {
   todos.DOM.remove();
-  //Do nothing
-  //Welcome to the void. After 3 days to lazy to
-  //impletement delete function.
+  removedList.push(todos);
+  todoList.splice(index, 1);
+  console.log(removedList);
 }
 
 //! Render Module
@@ -333,14 +329,6 @@ let savedList = [];
 let todoLocalStorage = [];
 let savedTodo = [];
 let savedTodoFile = [];
-
-// function mylocalStorage() {
-//   localStorage.setItem("newTodoLists", JSON.stringify(newTodoLists));
-//   console.log(JSON.parse(localStorage.getItem("newTodoLists"))); // { name: "Alex" }
-
-//   localStorage.setItem("todoList", JSON.stringify(todoList));
-//   console.log(JSON.parse(localStorage.getItem("todoList"))); // { name: "Alex" }
-// }
 
 //! List Storage Module
 function saveTodoToLocalStorage(title, task, duedate, priority, notes, myTodoList, completed, deleted) {
