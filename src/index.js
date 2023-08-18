@@ -385,13 +385,10 @@ function loadTodo() {
 //! List Storage Module
 function saveListToLocalStorage() {
   listLocalStorage = [...newTodoLists];
-  // console.log(newTodoLists);
   localStorage.setItem("todoList", JSON.stringify(listLocalStorage));
 }
 function loadListFromLocalStorage() {
   savedList = JSON.parse(localStorage.getItem("todoList"));
-  console.log("savedList");
-  console.log(savedList);
 }
 function loadList() {
   loadListFromLocalStorage();
@@ -411,6 +408,7 @@ function createTodoFast() {
   getFormInfo(getTitle, gettask, getdueDate, getpriority, getNotes, getMyTodoList, getcompleted, getdeleted);
 }
 
+//! Automatic load LocalStorage
 if (localStorage.todoList) {
   loadList();
 }
