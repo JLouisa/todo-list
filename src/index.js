@@ -33,6 +33,8 @@ class Todo {
     this.priorityEl = document.createElement("div");
     this.notesEl = document.createElement("div");
     this.delBtnEl = document.createElement("button");
+    this.addBtnEl = document.createElement("button");
+    this.editBtnEl = document.createElement("div");
   }
   findIndex() {
     // <-------------------
@@ -46,6 +48,17 @@ class Todo {
         this.completed = false;
       }
       completedRenderController();
+    });
+  }
+  editBtn() {
+    this.editBtnEl.addEventListener("click", () => {
+      formTitleEl.setAttribute("value", this.title);
+      formTaskeEl.setAttribute("value", this.task);
+      datetimeeEl.setAttribute("value", this.duedate);
+      formPriorityEl.setAttribute("value", this.priority);
+      formNoteseEl.setAttribute("value", this.notes);
+      todoSelect.setAttribute("value", this.myTodoList);
+      this.addBtnEl.setAttribute("style", "display: inline;");
     });
   }
   delBtn() {
@@ -75,6 +88,7 @@ function createTodo(title, task, duedate, priority, notes, myTodoList, completed
   newTodo.delBtn();
   todoList.push(newTodo);
   newTodo.findIndex();
+  newTodo.editBtn();
   return newTodo;
 }
 function createNewListSection(name) {
@@ -230,6 +244,11 @@ function renderOptimizer(todos) {
   todos.DOM.appendChild(todos.priorityEl);
   todos.notesEl.textContent = todos.notes;
   todos.DOM.appendChild(todos.notesEl);
+  todos.editBtnEl.textContent = "⋮";
+  todos.DOM.appendChild(todos.editBtnEl);
+  todos.addBtnEl.textContent = "Add";
+  todos.addBtnEl.setAttribute("style", "display: none;");
+  addNewTodoBtnEl.insertAdjacentElement("afterend", todos.addBtnEl);
   todos.delBtnEl.textContent = "X";
 }
 
