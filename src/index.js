@@ -176,7 +176,7 @@ cancelBtn.addEventListener("click", useCancel);
 //* Todos
 function getFormInfo(title, task, dateTime, priority, notes, todoSelect, completed, deleted) {
   createTodo(title, task, dateTime, priority, notes, todoSelect, completed, deleted);
-  saveTodoToLocalStorage(title, task, dateTime, priority, notes, todoSelect, completed, deleted);
+  // saveTodoToLocalStorage(title, task, dateTime, priority, notes, todoSelect, completed, deleted);
   formTodo.reset();
   completedRenderController();
 }
@@ -203,13 +203,13 @@ function completedRenderController() {
       }
     }
   });
+  saveTodoToLocalStorage(todoList);
 }
 
 //! Render Conroller Remove Module
 function removeRenderController(todos) {
   switch (todos.deleted) {
     case true: {
-      // removeController(todos);
       removeController(todoList.indexOf(todos), todos);
       break;
     }
@@ -326,24 +326,12 @@ function useCancel() {
 //! Local Storage Module
 let listLocalStorage = [];
 let savedList = [];
-let todoLocalStorage = [];
+let todoLocalStorage;
 let savedTodo = [];
-let savedTodoFile = [];
 
 //! List Storage Module
-function saveTodoToLocalStorage(title, task, duedate, priority, notes, myTodoList, completed, deleted) {
-  todoLocalStorage.push(
-    (savedTodoFile = {
-      title: title,
-      task: task,
-      duedate: duedate,
-      priority: priority,
-      notes: notes,
-      myTodoList: myTodoList,
-      completed: completed,
-      deleted: deleted,
-    })
-  );
+function saveTodoToLocalStorage(thelist) {
+  todoLocalStorage = [...thelist];
   localStorage.setItem("todos", JSON.stringify(todoLocalStorage));
 }
 function loadTodoFromLocalStorage() {
@@ -385,4 +373,22 @@ function createListFast() {
   createFastList.forEach((items) => {
     getNewFormListInfo(newTodoLists, items);
   });
+}
+
+function doTest() {
+  let savedTodoFile2 = {
+    title: todoList[0].title,
+    task: todoList[0].task,
+    duedate: todoList[0].duedate,
+    priority: todoList[0].priority,
+    notes: todoList[0].notes,
+    myTodoList: todoList[0].myTodoList,
+    completed: todoList[0].completed,
+    deleted: todoList[0].deleted,
+  };
+  return savedTodoFile2;
+}
+
+function createTodoFast() {
+  getFormInfo(getTitle, gettask, getdueDate, getpriority, getNotes, getMyTodoList, getcompleted, getdeleted);
 }
