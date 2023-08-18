@@ -12,6 +12,7 @@ let getdeleted = false;
 //! Variables
 let todoList = [];
 let removedList = [];
+
 let newTodoLists = [];
 
 //! Classes
@@ -84,7 +85,6 @@ class Todo {
       addBtn.setAttribute("style", "display: inline;");
       cancelBtn.setAttribute("style", "display: inline;");
       this.cancelBtnEl.setAttribute("style", "display: none;");
-
       completedRenderController();
     });
   }
@@ -101,7 +101,6 @@ class Todo {
       useCancel();
     });
   }
-
   changecompleted() {
     this.completed = true;
   }
@@ -134,21 +133,21 @@ function createNewListSection(name) {
 
 //! DOM Cache Module
 const addNewTodoBtnEl = document.getElementById("addBtn");
-const todolistEl = document.getElementById("todolist");
+const addNewListSection = document.getElementById("addNewListSection");
+const btnNewListSection = document.getElementById("btnNewListSection");
+const cancelBtn = document.getElementById("cancelBtn");
+const cancelbtnNewListSection = document.getElementById("cancelbtnNewListSection");
 const completedlist = document.getElementById("completedlist");
+const datetimeeEl = document.getElementById("datetime-local");
 const formTodo = document.getElementById("formTodo");
 const formList = document.getElementById("formList");
 const formTitleEl = document.getElementById("formTitle");
 const formTaskeEl = document.getElementById("formTask");
-const datetimeeEl = document.getElementById("datetime-local");
+const todolistEl = document.getElementById("todolist");
 const formPriorityEl = document.getElementById("formPriority");
 const formNoteseEl = document.getElementById("formNotes");
-const todoSelect = document.getElementById("todoSelect");
-const addNewListSection = document.getElementById("addNewListSection");
-const btnNewListSection = document.getElementById("btnNewListSection");
 const myLists = document.querySelector(".myLists");
-const cancelbtnNewListSection = document.getElementById("cancelbtnNewListSection");
-const cancelBtn = document.getElementById("cancelBtn");
+const todoSelect = document.getElementById("todoSelect");
 
 //! Remove HTML Elements Module
 function removeElements() {
@@ -158,7 +157,8 @@ function removeElements() {
   });
 }
 
-//! Fetch Form Info Module
+//! Fetch Form Info Controller
+//* Todos
 function getFormInfo() {
   createTodo(
     formTitleEl.value,
@@ -173,8 +173,7 @@ function getFormInfo() {
   formTodo.reset();
   completedRenderController();
 }
-
-//! Form Info List Controller
+//* List
 function getNewFormListInfo() {
   newTodoLists.push(new NewListSection(addNewListSection.value));
   formList.reset();
@@ -324,4 +323,27 @@ function useCancel() {
   cancelBtn.setAttribute("style", "display: inline;");
   formTodo.reset();
   formList.reset();
+}
+
+//! Local Storage Module
+function mylocalStorage() {
+  localStorage.setItem("newTodoLists", JSON.stringify(newTodoLists));
+  console.log(JSON.parse(localStorage.getItem("newTodoLists"))); // { name: "Alex" }
+
+  localStorage.setItem("todoList", JSON.stringify(todoList));
+  console.log(JSON.parse(localStorage.getItem("todoList"))); // { name: "Alex" }
+}
+
+function saveToLocalStorage() {}
+
+function loadFromLocalStorage() {}
+
+let savedMem = ["Projects", "Meetings", "Chores", "Reports"];
+
+function createlist() {
+  savedMem.forEach((list) => {
+    newTodoLists.push(new NewListSection(list));
+  });
+  formList.reset();
+  renderNewList();
 }
