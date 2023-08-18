@@ -108,6 +108,8 @@ class NewListSection {
     this.sectiontitleEl = document.createElement("h1");
     this.listName = document.createElement("div");
     this.listOption = document.createElement("option");
+    this.editBtnEl = document.createElement("div");
+    this.groupEl = document.createElement("div");
   }
 }
 
@@ -303,11 +305,14 @@ function renderNewList() {
   newTodoLists.forEach((list) => {
     list.sectiontitleEl.textContent = list.name;
     list.listSection.setAttribute("class", "list");
-    list.listName.setAttribute("id", `${list.name}`);
+    list.listName.setAttribute("id", list.name);
     myLists.prepend(list.listSection);
-    list.listSection.appendChild(list.sectiontitleEl);
+    list.editBtnEl.textContent = "⋮";
+    list.listSection.appendChild(list.groupEl);
+    list.groupEl.appendChild(list.sectiontitleEl);
+    list.groupEl.appendChild(list.editBtnEl);
     list.listSection.appendChild(list.listName);
-    list.listOption.setAttribute("value", `${list.name}`);
+    list.listOption.setAttribute("value", list.name);
     list.listOption.textContent = list.name;
     todoSelect.appendChild(list.listOption);
   });
