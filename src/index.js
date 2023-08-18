@@ -183,9 +183,8 @@ function getFormInfo(title, task, dateTime, priority, notes, todoSelect, complet
 //* List
 function getNewFormListInfo(list, items) {
   list.push(new NewListSection(items));
-  saveListToLocalStorage(items);
   formList.reset();
-  renderNewList();
+  listRenderController(items);
 }
 
 //! Completed Render Controller Module
@@ -293,6 +292,12 @@ function renderOptimizer(todos) {
   todos.delBtnEl.textContent = "X";
 }
 
+//! List Render Controller
+function listRenderController(items) {
+  renderNewList();
+  saveListToLocalStorage(items);
+}
+
 //! Render New List
 function renderNewList() {
   newTodoLists.forEach((list) => {
@@ -373,20 +378,6 @@ function createListFast() {
   createFastList.forEach((items) => {
     getNewFormListInfo(newTodoLists, items);
   });
-}
-
-function doTest() {
-  let savedTodoFile2 = {
-    title: todoList[0].title,
-    task: todoList[0].task,
-    duedate: todoList[0].duedate,
-    priority: todoList[0].priority,
-    notes: todoList[0].notes,
-    myTodoList: todoList[0].myTodoList,
-    completed: todoList[0].completed,
-    deleted: todoList[0].deleted,
-  };
-  return savedTodoFile2;
 }
 
 function createTodoFast() {
