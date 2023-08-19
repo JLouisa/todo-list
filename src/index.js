@@ -29,7 +29,7 @@ const myTodoListPro = (() => {
       this.notesEl = document.createElement("div");
       this.delBtnEl = document.createElement("button");
       this.addBtnEl = document.createElement("button");
-      this.editBtnEl = document.createElement("div");
+      this.editBtnEl = document.createElement("button");
       this.cancelBtnEl = document.createElement("button");
       this.groupTodoITTEl = document.createElement("div");
       this.groupTodoRestEl = document.createElement("div");
@@ -46,6 +46,7 @@ const myTodoListPro = (() => {
     }
     editBtn() {
       this.editBtnEl.addEventListener("click", () => {
+        formTodoContainerEl.setAttribute("style", "display: flex");
         formTitleEl.setAttribute("value", this.title);
         formTaskeEl.setAttribute("value", this.task);
         datetimeeEl.setAttribute("value", this.duedate);
@@ -88,6 +89,7 @@ const myTodoListPro = (() => {
     }
     cancelBtnTodo() {
       this.cancelBtnEl.addEventListener("click", () => {
+        formTodoContainerEl.setAttribute("style", "display: none");
         this.addBtnEl.setAttribute("style", "display: none;");
         this.cancelBtnEl.setAttribute("style", "display: none;");
         useCancel();
@@ -120,7 +122,7 @@ const myTodoListPro = (() => {
       this.sectiontitleEl = document.createElement("h1");
       this.listName = document.createElement("div");
       this.listOption = document.createElement("option");
-      this.editBtnEl = document.createElement("div");
+      this.editBtnEl = document.createElement("button");
       this.groupEl = document.createElement("div");
       this.delListBtn = document.createElement("button");
     }
@@ -133,6 +135,18 @@ const myTodoListPro = (() => {
       this.delListBtn.addEventListener("click", () => {
         this.listSection.remove();
         removeControllerList(newTodoLists.indexOf(this), newTodoLists);
+      });
+    }
+    showEditBtn() {
+      this.listSection.addEventListener("mouseover", () => {
+        this.editBtnEl.style.visibility = "visible";
+        // myFunction(this.editBtnEl);
+      });
+    }
+    hideEditBtn() {
+      this.listSection.addEventListener("mouseout", () => {
+        this.editBtnEl.style.visibility = "hidden";
+        // myFunction(this.editBtnEl);
       });
     }
   }
@@ -154,6 +168,8 @@ const myTodoListPro = (() => {
     list.push(newList);
     newList.editListBtn();
     newList.delListBtn2();
+    newList.showEditBtn();
+    newList.hideEditBtn();
   }
 
   //! DOM Cache Module
@@ -325,8 +341,8 @@ const myTodoListPro = (() => {
     todos.groupTodoITTEl.appendChild(todos.titleEl);
     todos.duedateEl.textContent = format(parseISO(todos.duedate), "EEEE, MMMM do, hh:mm a");
     todos.groupTodoITTEl.appendChild(todos.duedateEl);
-    todos.editBtnEl.textContent = " ⋮ ";
-    todos.editBtnEl.setAttribute("class", "editTodo");
+    todos.editBtnEl.textContent = "edit";
+    todos.editBtnEl.setAttribute("class", "styleBtn1");
     todos.groupTodoITTEl.appendChild(todos.editBtnEl);
     todos.groupTodoRestEl.style.display = "none";
     todos.groupTodoRestEl.setAttribute("class", "groupTodoRestEl");
@@ -346,6 +362,7 @@ const myTodoListPro = (() => {
     todos.cancelBtnEl.setAttribute("class", "styleBtn2");
     todos.addBtnEl.insertAdjacentElement("afterend", todos.cancelBtnEl);
     todos.delBtnEl.textContent = "X";
+    todos.delBtnEl.setAttribute("class", "styleBtn3");
     todos.groupTodoITTEl.appendChild(todos.delBtnEl);
     todos.delBtnEl.style.display = "none";
     todos.editBtnEl.style.display = "inline";
@@ -365,10 +382,12 @@ const myTodoListPro = (() => {
       list.listSection.appendChild(list.groupEl);
       list.sectiontitleEl.textContent = list.name;
       list.groupEl.appendChild(list.sectiontitleEl);
-      list.editBtnEl.textContent = " ⋮ ";
-      list.editBtnEl.setAttribute("class", "editTodo");
+      list.editBtnEl.textContent = "edit";
+      list.editBtnEl.setAttribute("class", "styleBtn1");
+      list.editBtnEl.style.visibility = "hidden";
       list.groupEl.appendChild(list.editBtnEl);
       list.delListBtn.textContent = "Delete";
+      list.delListBtn.setAttribute("class", "styleBtn3");
       list.delListBtn.setAttribute("style", "display: none");
       list.groupEl.appendChild(list.delListBtn);
       list.listName.setAttribute("id", list.name);
@@ -437,26 +456,6 @@ const myTodoListPro = (() => {
     savedList.forEach((items) => {
       getNewFormListInfo(newTodoLists, items.name);
     });
-  }
-  //* Create info
-  let createFastList = ["Meeting", "Movies", "Chores", "Reports", "Conference"];
-  function createListFast() {
-    createFastList.forEach((items) => {
-      getNewFormListInfo(newTodoLists, items);
-    });
-  }
-  //Test Variables
-  let getTitle = "Preperation";
-  let gettask = "Send email to John";
-  let getdueDate = "Next friday";
-  let getpriority = "Low";
-  let getNotes = "Plan in a meeting for the report";
-  let getMyTodoList = "todolist";
-  let getcompleted = false;
-  let getdeleted = false;
-
-  function createTodoFast() {
-    getFormInfo(getTitle, gettask, getdueDate, getpriority, getNotes, getMyTodoList, getcompleted, getdeleted);
   }
 
   //! Automatic load LocalStorage
