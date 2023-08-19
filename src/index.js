@@ -1,4 +1,4 @@
-import { compareAsc, format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const myTodoListPro = (() => {
   //! Variables
@@ -285,7 +285,7 @@ const myTodoListPro = (() => {
     todos.DOM.appendChild(todos.titleEl);
     todos.taskEl.textContent = todos.task;
     todos.DOM.appendChild(todos.taskEl);
-    todos.duedateEl.textContent = todos.duedate;
+    todos.duedateEl.textContent = format(parseISO(todos.duedate), "EEEE, MMMM do, yyyy hh:mm a");
     todos.DOM.appendChild(todos.duedateEl);
     todos.priorityEl.textContent = todos.priority;
     todos.DOM.appendChild(todos.priorityEl);
