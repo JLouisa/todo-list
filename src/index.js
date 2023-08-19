@@ -1,4 +1,5 @@
 import { format, parseISO } from "date-fns";
+import "./styles.css";
 
 const myTodoListPro = (() => {
   //! Variables
@@ -29,6 +30,8 @@ const myTodoListPro = (() => {
       this.addBtnEl = document.createElement("button");
       this.editBtnEl = document.createElement("div");
       this.cancelBtnEl = document.createElement("button");
+      this.groupTodoITTEl = document.createElement("div");
+      this.groupTodoRestEl = document.createElement("div");
     }
     listener() {
       this.inputEl.addEventListener("change", () => {
@@ -280,19 +283,24 @@ const myTodoListPro = (() => {
     todos.inputEl.setAttribute("id", "checkbox");
     todos.inputEl.setAttribute("name", "checkbox");
     todos.inputEl.setAttribute("value", "checked");
-    todos.DOM.appendChild(todos.inputEl);
+    todos.groupTodoITTEl.setAttribute("class", "groupTodoTitle");
+    todos.DOM.appendChild(todos.groupTodoITTEl);
+    todos.groupTodoITTEl.appendChild(todos.inputEl);
     todos.titleEl.textContent = todos.title;
-    todos.DOM.appendChild(todos.titleEl);
-    todos.taskEl.textContent = todos.task;
-    todos.DOM.appendChild(todos.taskEl);
-    todos.duedateEl.textContent = format(parseISO(todos.duedate), "EEEE, MMMM do, yyyy hh:mm a");
-    todos.DOM.appendChild(todos.duedateEl);
-    todos.priorityEl.textContent = todos.priority;
-    todos.DOM.appendChild(todos.priorityEl);
-    todos.notesEl.textContent = todos.notes;
-    todos.DOM.appendChild(todos.notesEl);
-    todos.editBtnEl.textContent = "⋮";
-    todos.DOM.appendChild(todos.editBtnEl);
+    todos.groupTodoITTEl.appendChild(todos.titleEl);
+    todos.duedateEl.textContent = format(parseISO(todos.duedate), "EEEE, MMMM do, hh:mm a");
+    todos.groupTodoITTEl.appendChild(todos.duedateEl);
+    todos.editBtnEl.textContent = " ⋮ ";
+    todos.editBtnEl.setAttribute("class", "editTodo");
+    todos.groupTodoITTEl.appendChild(todos.editBtnEl);
+    todos.groupTodoRestEl.setAttribute("class", "groupTodoRestEl");
+    todos.DOM.appendChild(todos.groupTodoRestEl);
+    todos.taskEl.textContent = `Task: ${todos.task}`;
+    todos.groupTodoRestEl.appendChild(todos.taskEl);
+    todos.priorityEl.textContent = `Priority: ${todos.priority}`;
+    todos.groupTodoRestEl.appendChild(todos.priorityEl);
+    todos.notesEl.textContent = `Notes: ${todos.notes}`;
+    todos.groupTodoRestEl.appendChild(todos.notesEl);
     todos.addBtnEl.textContent = "Edit";
     todos.addBtnEl.setAttribute("style", "display: none;");
     addNewTodoBtnEl.insertAdjacentElement("afterend", todos.addBtnEl);
@@ -316,7 +324,8 @@ const myTodoListPro = (() => {
       list.listSection.appendChild(list.groupEl);
       list.sectiontitleEl.textContent = list.name;
       list.groupEl.appendChild(list.sectiontitleEl);
-      list.editBtnEl.textContent = "⋮";
+      list.editBtnEl.textContent = " ⋮ ";
+      list.editBtnEl.setAttribute("class", "editTodo");
       list.groupEl.appendChild(list.editBtnEl);
       list.delListBtn.textContent = "Delete";
       list.delListBtn.setAttribute("style", "display: none");

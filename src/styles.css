@@ -40,7 +40,12 @@ nav {
 .main {
   width: 100%;
   min-height: 80vh;
-  max-width: 980px;
+  /* max-width: 980px; */
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid red; */
+  flex-grow: 1;
+  flex-basis: auto;
 }
 
 footer {
@@ -51,9 +56,89 @@ footer {
   width: 100%;
   border-top: 1px solid var(--border-color);
   gap: 10px;
+  height: 3rem;
+  max-height: 4rem;
 }
 
 .gitHub {
   width: 4rem;
   height: auto;
+}
+/* ---------------------------------------------------------- */
+.sidebar {
+  /* width: 100%; */
+  flex-grow: 1;
+  flex-grow: 1;
+  border: 1px solid blue;
+}
+
+#content {
+  width: 100%;
+  max-width: 980px;
+  flex-grow: 1;
+  flex-grow: 2;
+  border: 1px solid red;
+  padding: 1rem;
+}
+
+#content > *,
+.myLists {
+  border: 1px solid green;
+}
+
+.list > div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cards {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.171);
+}
+
+.groupTodoTitle {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.groupTodoRestEl {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: -2rem;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.editTodo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: grey;
+}
+.editTodo:hover {
+  transform: scale(1.1);
+  pointer-events: none;
+}
+
+.sideLeft {
+  text-align: end;
+  padding: 1rem;
+}
+
+.addSectionList {
+  /* margin: 1rem; */
+  /* text-align: end; */
 }

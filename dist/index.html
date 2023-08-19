@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title Document</title>
+    <title>Odin's Todo List</title>
+    <link rel="icon" type="image/x-icon" href="../src/images/Sharingan.png">
 </head>
 
 <body>
     <nav>
         <div class="navBar">
-            <h1>Title</h1>
+            <h1>Odin's Todo List</h1>
             <form id="formList">
                 <label for="addNewListSection">New List</label>
                 <input type="text" id="addNewListSection" name="addNewListSection">
@@ -20,40 +21,45 @@
         </div>
     </nav>
     <div class="main">
-        <div id="content"></div>
-        <div>
-            <form id="formTodo">
-                <label for="formTitle">Title</label><input type="text" id="formTitle" name="formTitle">
-                <label for="formTask">Task</label>
-                <input type="text" id="formTask" name="formTask">
-                <label for="formDueDate">Due Date</label>
-                <input type="datetime-local" id="datetime-local" name="datetime-local">
-                <label for="formPriority">Priority</label>
-                <select id="formPriority">
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
-                <label for="formNotes">Notes</label>
-                <input type="textarea" id="formNotes" name="formNotes" rows="10" cols="50">
-                <label for="formPriority">Todo List</label>
-                <select id="todoSelect">
-                    <option value="todolist">Your Todo List</option>
-                </select>
-            </form>
-            <button id="addBtn">Add</button>
-            <button id="cancelBtn">Cancel</button>
-            <div class="myLists">
-                <div class="list">
-                    <h1>My Todo List</h1>
-                    <div id="todolist"></div>
-                </div>
-                <div class="list">
-                    <h1>Completed List</h1>
-                    <div id="completedlist"></div>
+        <div class="sidebar sideLeft">
+            <button id="addSectionList">+ New List</button>
+        </div>
+        <div id="content">
+            <div>
+                <form id="formTodo">
+                    <label for="formTitle">Title</label><input type="text" id="formTitle" name="formTitle">
+                    <label for="formTask">Task</label>
+                    <input type="text" id="formTask" name="formTask">
+                    <label for="formDueDate">Due Date</label>
+                    <input type="datetime-local" id="datetime-local" name="datetime-local">
+                    <label for="formPriority">Priority</label>
+                    <select id="formPriority">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                    <label for="formNotes">Notes</label>
+                    <input type="textarea" id="formNotes" name="formNotes" rows="10" cols="50">
+                    <label for="formPriority">Todo List</label>
+                    <select id="todoSelect">
+                        <option value="todolist">Your Todo List</option>
+                    </select>
+                </form>
+                <button id="addBtn">Add</button>
+                <button id="cancelBtn">Cancel</button>
+                <div class="myLists">
+                    <div class="list">
+                        <h1>My Todo List</h1>
+                        <div id="todolist"></div>
+                    </div>
+                    <div class="list">
+                        <h1>Completed List</h1>
+                        <div id="completedlist"></div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="sidebar sideRight"></div>
     </div>
     <footer>
         <img src="../src/images/GitHub_Logo.png" alt="Github logo" class="gitHub">
