@@ -25,7 +25,8 @@
             <div class="formListContainer">
                 <form id="formList">
                     <label for="addNewListSection"></label>
-                    <input type="text" id="addNewListSection" name="addNewListSection" placeholder="New List">
+                    <input type="text" id="addNewListSection" name="addNewListSection" placeholder="New List"
+                        maxlength="20">
                 </form>
                 <button id="btnNewListSection" type="submit" class="styleBtn1">Add</button>
                 <button id="cancelbtnNewListSection" type="submit" class="styleBtn2">Cancel</button>
@@ -34,9 +35,10 @@
                 <div class="formTodoContainer">
                     <div class="containerForm2">
                         <form id="formTodo">
-                            <label for="formTitle">Title</label><input type="text" id="formTitle" name="formTitle">
+                            <label for="formTitle">Title</label>
+                            <input type="text" id="formTitle" name="formTitle" maxlength="20">
                             <label for="formTask">Task</label>
-                            <input type="text" id="formTask" name="formTask">
+                            <input type="text" id="formTask" name="formTask" maxlength="40">
                             <label for="formDueDate">Due Date</label>
                             <input type="datetime-local" id="datetime-local" name="datetime-local">
                             <label for="formPriority">Priority</label>
