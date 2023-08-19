@@ -40,10 +40,8 @@ nav {
 .main {
   width: 100%;
   min-height: 80vh;
-  /* max-width: 980px; */
   display: flex;
   justify-content: center;
-  /* border: 1px solid red; */
   flex-grow: 1;
   flex-basis: auto;
 }
@@ -78,10 +76,7 @@ footer {
 }
 
 .sidebar {
-  /* width: 100%; */
   flex-grow: 1;
-  flex-grow: 1;
-  border: 1px solid blue;
 }
 
 #content {
@@ -89,13 +84,7 @@ footer {
   max-width: 980px;
   flex-grow: 1;
   flex-grow: 2;
-  border: 1px solid red;
   padding: 1rem;
-}
-
-#content > *,
-.myLists {
-  border: 1px solid green;
 }
 
 .list > div:first-child {
@@ -164,11 +153,11 @@ footer {
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border: 2px solid black;
 }
 
 .formTodoContainer {
   position: absolute;
-  border: 1px solid gold;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -178,15 +167,16 @@ footer {
   gap: 2rem;
   top: 50%;
   left: 50%;
+  border: 2px solid black;
   transform: translate(-50%, -50%);
 }
 
 .containerForm2 {
   display: flex;
+  justify-content: center;
   gap: 1rem;
   padding: 1rem;
-  width: 300px;
-  border: 1px solid red;
+  width: 400px;
 }
 
 #formTodo {
@@ -209,6 +199,11 @@ form {
   border-radius: 6px;
   outline: none;
   box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+}
+form:focus {
+  border-color: #0366d6;
+  outline: none;
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
 
 .styleBtn1 {
@@ -276,4 +271,10 @@ input[type="checkbox"] {
   width: 30px;
   height: 30px;
   accent-color: #009879;
+}
+
+textarea {
+  width: 250px;
+  height: 10em;
+  resize: none;
 }

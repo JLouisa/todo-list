@@ -1,5 +1,6 @@
 import { format, parseISO } from "date-fns";
 import "./styles.css";
+import dots from "./images/threedots.svg";
 
 const myTodoListPro = (() => {
   //! Variables
@@ -298,20 +299,16 @@ const myTodoListPro = (() => {
   function todoRender(list, todos) {
     list.listName.appendChild(todos.DOM);
     renderOptimizer(todos);
-    todos.editBtnEl.setAttribute("style", "display: none;");
-    todos.delBtnEl.setAttribute("style", "display: inline;");
   }
   function defaultRender(todos) {
     todolistEl.appendChild(todos.DOM);
     renderOptimizer(todos);
-    todos.editBtnEl.setAttribute("style", "display: inline;");
-    todos.delBtnEl.setAttribute("style", "display: none;");
   }
   function completedRender(todos) {
     completedlist.appendChild(todos.DOM);
     renderOptimizer(todos);
-    todos.delBtnEl.setAttribute("style", "display: inline;");
     todos.editBtnEl.setAttribute("style", "display: none;");
+    todos.delBtnEl.style.display = "inline";
   }
 
   //! Render Optimizer
@@ -350,6 +347,8 @@ const myTodoListPro = (() => {
     todos.addBtnEl.insertAdjacentElement("afterend", todos.cancelBtnEl);
     todos.delBtnEl.textContent = "X";
     todos.groupTodoITTEl.appendChild(todos.delBtnEl);
+    todos.delBtnEl.style.display = "none";
+    todos.editBtnEl.style.display = "inline";
   }
 
   //! List Render Controller
