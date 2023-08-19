@@ -157,6 +157,8 @@ const myTodoListPro = (() => {
   const todoSelect = document.getElementById("todoSelect");
   const addSectionList = document.getElementById("addSectionList");
   const formListContainer = document.querySelector(".formListContainer");
+  const addTodoButtonEl = document.getElementById("addTodoButton");
+  const formTodoContainerEl = document.querySelector(".formTodoContainer");
 
   //! Remove HTML Elements Module
   function removeElements() {
@@ -178,6 +180,7 @@ const myTodoListPro = (() => {
       false,
       false
     );
+    formTodoContainerEl.setAttribute("style", "display: none");
   });
   btnNewListSection.addEventListener("click", () => {
     getNewFormListInfo(newTodoLists, addNewListSection.value);
@@ -187,11 +190,20 @@ const myTodoListPro = (() => {
     useCancel();
     formListContainer.setAttribute("style", "display:none");
   });
-  cancelBtn.addEventListener("click", useCancel);
+  cancelBtn.addEventListener("click", () => {
+    useCancel();
+    formTodoContainerEl.setAttribute("style", "display: none");
+  });
   addSectionList.addEventListener("click", () => {
     formListContainer.setAttribute("style", "display:flex");
   });
+  //
 
+  addTodoButtonEl.addEventListener("click", () => {
+    formTodoContainerEl.setAttribute("style", "display: flex");
+  });
+
+  //
   //! Fetch Form Info Controller
   //* Todos
   function getFormInfo(title, task, dateTime, priority, notes, todoSelect, completed, deleted) {
