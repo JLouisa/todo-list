@@ -102,12 +102,10 @@ const myTodoListPro = (() => {
       this.DOM.addEventListener("click", () => {
         switch (this.groupTodoRestEl.style.display) {
           case "flex": {
-            console.log("hide");
             this.groupTodoRestEl.style.display = "none";
             break;
           }
           case "none": {
-            console.log("show");
             this.groupTodoRestEl.style.display = "flex";
             break;
           }
@@ -128,7 +126,17 @@ const myTodoListPro = (() => {
     }
     editListBtn() {
       this.editBtnEl.addEventListener("click", () => {
-        this.delListBtn.setAttribute("style", "display: inline");
+        // this.delListBtn.style.display = "inline";
+        switch (this.delListBtn.style.display) {
+          case "inline": {
+            this.delListBtn.style.display = "none";
+            break;
+          }
+          case "none": {
+            this.delListBtn.style.display = "inline";
+            break;
+          }
+        }
       });
     }
     delListBtn2() {
@@ -379,6 +387,7 @@ const myTodoListPro = (() => {
     newTodoLists.forEach((list) => {
       myLists.prepend(list.listSection);
       list.listSection.setAttribute("class", "list");
+      list.groupEl.setAttribute("class", "groupTitle");
       list.listSection.appendChild(list.groupEl);
       list.sectiontitleEl.textContent = list.name;
       list.groupEl.appendChild(list.sectiontitleEl);

@@ -158,6 +158,7 @@ footer {
   left: 50%;
   border: 2px solid black;
   transform: translate(-50%, -50%);
+  z-index: 9;
 }
 
 .containerForm2 {
@@ -252,14 +253,23 @@ form:focus {
   transition: ease-in-out;
 }
 
-.content {
+#content {
   position: relative;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
 }
 
 input[type="checkbox"] {
   width: 30px;
   height: 30px;
   accent-color: #009879;
+}
+
+#formList input[type="text"] {
+  width: 20rem;
+  height: 2rem;
+  margin: 5px;
+  font-size: 1.5rem;
 }
 
 textarea {
@@ -301,4 +311,8 @@ textarea {
   transform: scale(1.1);
   transition: ease-in-out;
   background: #e62c03;
+}
+
+.groupTitle h1 {
+  margin-left: 7rem;
 }
