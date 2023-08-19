@@ -95,6 +95,22 @@ const myTodoListPro = (() => {
     changecompleted() {
       this.completed = true;
     }
+    showDetails() {
+      this.DOM.addEventListener("click", () => {
+        switch (this.groupTodoRestEl.style.display) {
+          case "flex": {
+            console.log("hide");
+            this.groupTodoRestEl.style.display = "none";
+            break;
+          }
+          case "none": {
+            console.log("show");
+            this.groupTodoRestEl.style.display = "flex";
+            break;
+          }
+        }
+      });
+    }
   }
   class NewListSection {
     constructor(name) {
@@ -129,6 +145,7 @@ const myTodoListPro = (() => {
     newTodo.editBtn();
     newTodo.addBtn();
     newTodo.cancelBtnTodo();
+    newTodo.showDetails();
     return newTodo;
   }
   function createNewListSection(name, list) {
@@ -281,20 +298,20 @@ const myTodoListPro = (() => {
   function todoRender(list, todos) {
     list.listName.appendChild(todos.DOM);
     renderOptimizer(todos);
-    todos.delBtnEl.setAttribute("style", "display: none;");
-    todos.DOM.appendChild(todos.delBtnEl);
+    todos.editBtnEl.setAttribute("style", "display: none;");
+    todos.delBtnEl.setAttribute("style", "display: inline;");
   }
   function defaultRender(todos) {
     todolistEl.appendChild(todos.DOM);
     renderOptimizer(todos);
+    todos.editBtnEl.setAttribute("style", "display: inline;");
     todos.delBtnEl.setAttribute("style", "display: none;");
-    todos.DOM.appendChild(todos.delBtnEl);
   }
   function completedRender(todos) {
     completedlist.appendChild(todos.DOM);
     renderOptimizer(todos);
     todos.delBtnEl.setAttribute("style", "display: inline;");
-    todos.DOM.appendChild(todos.delBtnEl);
+    todos.editBtnEl.setAttribute("style", "display: none;");
   }
 
   //! Render Optimizer
@@ -314,6 +331,7 @@ const myTodoListPro = (() => {
     todos.editBtnEl.textContent = " ⋮ ";
     todos.editBtnEl.setAttribute("class", "editTodo");
     todos.groupTodoITTEl.appendChild(todos.editBtnEl);
+    todos.groupTodoRestEl.style.display = "none";
     todos.groupTodoRestEl.setAttribute("class", "groupTodoRestEl");
     todos.DOM.appendChild(todos.groupTodoRestEl);
     todos.taskEl.textContent = `Task: ${todos.task}`;
@@ -331,6 +349,7 @@ const myTodoListPro = (() => {
     todos.cancelBtnEl.setAttribute("class", "styleBtn2");
     todos.addBtnEl.insertAdjacentElement("afterend", todos.cancelBtnEl);
     todos.delBtnEl.textContent = "X";
+    todos.groupTodoITTEl.appendChild(todos.delBtnEl);
   }
 
   //! List Render Controller

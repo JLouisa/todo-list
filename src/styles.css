@@ -122,6 +122,7 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  cursor: default;
 }
 
 .groupTodoRestEl {
@@ -139,6 +140,7 @@ footer {
   font-weight: 700;
   font-size: 1.5rem;
   color: grey;
+  user-select: none;
 }
 .editTodo:hover {
   transform: scale(1.1);
@@ -268,4 +270,10 @@ form {
 
 .content {
   position: relative;
+}
+
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+  accent-color: #009879;
 }
