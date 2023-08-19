@@ -155,6 +155,8 @@ const myTodoListPro = (() => {
   const formNoteseEl = document.getElementById("formNotes");
   const myLists = document.querySelector(".myLists");
   const todoSelect = document.getElementById("todoSelect");
+  const addSectionList = document.getElementById("addSectionList");
+  const formListContainer = document.querySelector(".formListContainer");
 
   //! Remove HTML Elements Module
   function removeElements() {
@@ -179,9 +181,16 @@ const myTodoListPro = (() => {
   });
   btnNewListSection.addEventListener("click", () => {
     getNewFormListInfo(newTodoLists, addNewListSection.value);
+    formListContainer.setAttribute("style", "display:none");
   });
-  cancelbtnNewListSection.addEventListener("click", useCancel);
+  cancelbtnNewListSection.addEventListener("click", () => {
+    useCancel();
+    formListContainer.setAttribute("style", "display:none");
+  });
   cancelBtn.addEventListener("click", useCancel);
+  addSectionList.addEventListener("click", () => {
+    formListContainer.setAttribute("style", "display:flex");
+  });
 
   //! Fetch Form Info Controller
   //* Todos
@@ -303,9 +312,11 @@ const myTodoListPro = (() => {
     todos.groupTodoRestEl.appendChild(todos.notesEl);
     todos.addBtnEl.textContent = "Edit";
     todos.addBtnEl.setAttribute("style", "display: none;");
+    todos.addBtnEl.setAttribute("class", "styleBtn1");
     addNewTodoBtnEl.insertAdjacentElement("afterend", todos.addBtnEl);
     todos.cancelBtnEl.textContent = "Cancel";
     todos.cancelBtnEl.setAttribute("style", "display: none;");
+    todos.cancelBtnEl.setAttribute("class", "styleBtn2");
     todos.addBtnEl.insertAdjacentElement("afterend", todos.cancelBtnEl);
     todos.delBtnEl.textContent = "X";
   }

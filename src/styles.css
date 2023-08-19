@@ -65,6 +65,18 @@ footer {
   height: auto;
 }
 /* ---------------------------------------------------------- */
+.navBar {
+  display: flex;
+  width: 980px;
+  justify-content: space-around;
+}
+
+#navButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .sidebar {
   /* width: 100%; */
   flex-grow: 1;
@@ -138,7 +150,106 @@ footer {
   padding: 1rem;
 }
 
-.addSectionList {
-  /* margin: 1rem; */
-  /* text-align: end; */
+.formListContainer {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.formTodoContainer {
+  border: 1px solid gold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.containerForm2 {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  width: 300px;
+  border: 1px solid red;
+}
+
+#formTodo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px 12px;
+  font-size: 1.5rem;
+  line-height: 20px;
+  color: #24292e;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  border-radius: 6px;
+  outline: none;
+  box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+}
+
+.styleBtn1 {
+  margin: 10px;
+  outline: none;
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #009879, #009879);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #ffffff;
+  font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  height: 40px;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 20px;
+  vertical-align: top;
+  white-space: nowrap;
+  z-index: 9;
+  border: 0;
+  transition: box-shadow 0.2s;
+}
+
+.styleBtn2 {
+  margin: 10px;
+  outline: none;
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #ff7e31, #e62c03);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #ffffff;
+  font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  height: 40px;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 20px;
+  vertical-align: top;
+  white-space: nowrap;
+  z-index: 9;
+  border: 0;
+  transition: box-shadow 0.2s;
+}
+
+.styleBtn1:hover {
+  background: #00bd68;
+}
+.styleBtn1:active {
+  transform: scale(1.1);
+  transition: ease-in-out;
+}
+
+.styleBtn2:hover {
+  background: #e62c03;
+}
+
+.styleBtn2:active {
+  transform: scale(1.1);
+  transition: ease-in-out;
 }
