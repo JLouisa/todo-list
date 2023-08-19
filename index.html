@@ -12,41 +12,52 @@
     <nav>
         <div class="navBar">
             <h1>Odin's Todo List</h1>
-            <form id="formList">
-                <label for="addNewListSection">New List</label>
-                <input type="text" id="addNewListSection" name="addNewListSection">
-            </form>
-            <button id="btnNewListSection" type="submit">Add</button>
-            <button id="cancelbtnNewListSection" type="submit">Cancel</button>
+            <div id="navButtonContainer">
+                <button id="addTodoButton" class="styleBtn1">+ New Task</button>
+            </div>
         </div>
     </nav>
     <div class="main">
         <div class="sidebar sideLeft">
-            <button id="addSectionList">+ New List</button>
+            <button id="addSectionList" class="styleBtn1">+ New List</button>
         </div>
         <div id="content">
-            <div>
-                <form id="formTodo">
-                    <label for="formTitle">Title</label><input type="text" id="formTitle" name="formTitle">
-                    <label for="formTask">Task</label>
-                    <input type="text" id="formTask" name="formTask">
-                    <label for="formDueDate">Due Date</label>
-                    <input type="datetime-local" id="datetime-local" name="datetime-local">
-                    <label for="formPriority">Priority</label>
-                    <select id="formPriority">
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                    </select>
-                    <label for="formNotes">Notes</label>
-                    <input type="textarea" id="formNotes" name="formNotes" rows="10" cols="50">
-                    <label for="formPriority">Todo List</label>
-                    <select id="todoSelect">
-                        <option value="todolist">Your Todo List</option>
-                    </select>
+            <div class="formListContainer">
+                <form id="formList">
+                    <label for="addNewListSection">New List</label>
+                    <input type="text" id="addNewListSection" name="addNewListSection">
                 </form>
-                <button id="addBtn">Add</button>
-                <button id="cancelBtn">Cancel</button>
+                <button id="btnNewListSection" type="submit" class="styleBtn1">Add</button>
+                <button id="cancelbtnNewListSection" type="submit" class="styleBtn2">Cancel</button>
+            </div>
+            <div>
+                <div class="formTodoContainer">
+                    <div class="containerForm2">
+                        <form id="formTodo">
+                            <label for="formTitle">Title</label><input type="text" id="formTitle" name="formTitle">
+                            <label for="formTask">Task</label>
+                            <input type="text" id="formTask" name="formTask">
+                            <label for="formDueDate">Due Date</label>
+                            <input type="datetime-local" id="datetime-local" name="datetime-local">
+                            <label for="formPriority">Priority</label>
+                            <select id="formPriority">
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                            <label for="formNotes">Notes</label>
+                            <input type="textarea" id="formNotes" name="formNotes" rows="10" cols="50">
+                            <label for="formPriority">Todo List</label>
+                            <select id="todoSelect">
+                                <option value="todolist">Your Todo List</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="formBtns">
+                        <button id="addBtn" class="styleBtn1">Add</button>
+                        <button id="cancelBtn" class="styleBtn2">Cancel</button>
+                    </div>
+                </div>
                 <div class="myLists">
                     <div class="list">
                         <h1>My Todo List</h1>
