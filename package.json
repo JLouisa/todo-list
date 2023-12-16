@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "aaa": "git subtree push --prefix dist origin gh-pages",
+    "done": "git subtree push --prefix dist origin gh-pages",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
     "server": "node server.js",
